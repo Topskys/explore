@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+
+			#box {
+				width: 600px;
+				height: 600px;
+				/* margin: 0 auto; */
+				float: left;
+				border: 1px solid #ccc;
+			}
+
+			img {
+				width: 200px;
+				height: 200px;
+			}
+		</style>
+
+	</head>
+	<body>
+		<div id="box" ondragover="dragover(event)" ondrop="drop(event)">
+			<h1 align="center">拖动照片到Box中</h1>
+		</div>
+		<img id="dragImg" src="../img/slim.png" draggable="true" ondragstart="drag(event)">
+
+		<!-- ctrl+k 格式化-->
+		<script>
+			//拖动照片到Box中
+			let drag = (e) => {
+				//交流数据
+				e.dataTransfer.setData("Text", e.target.id);
+				console.log(e.target.id)
+			}
+
+			let drop = (e) => {
+				//传入drag的id
+				let data = e.dataTransfer.getData("Text")
+				let dImg = document.getElementById(data);
+				e.target.appendChild(dImg); //在box中增加子节点（元素）
+				console.log(data)
+			}
+
+			let dragover = (e) => {
+				// 阻止禁止拖拽默认行为
+				e.preventDefault();
+			}
+		</script>
+
+	</body>
+</html>

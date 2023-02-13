@@ -1,0 +1,44 @@
+<!--
+ * @Author: Topskys
+ * @Date: 2022-10-31 19:12:43
+ * @LastEditTime: 2022-10-31 19:14:30
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js读取本地文件</title>
+</head>
+
+<body>
+<input type="file" id="testJsonFile" onchange="openFile(event)">
+
+<!-- <script type="text/javascript">
+    //获取到选中的文件
+    var openFile = function (event) {
+        var input = event.target;
+        var reader = new FileReader();
+        reader.readAsText(input.files[0],'utf-8');// 读取第一个文件
+        reader.onload = ()=> reader.result && (document.body.innerHTML = reader.result) //console.log(reader.result); // 打印文件内容
+    };
+</script> -->
+<script>
+  const input = document.querySelector('input[type=file]')
+ 
+  input.addEventListener('change', ()=>{
+    console.log( input.files )
+    const reader = new FileReader()
+    reader.readAsDataURL(input.files[0]) // input.files[0]为第一个文件
+    reader.onload = ()=>{
+      const img = new Image()
+      img.src = reader.result
+      document.body.appendChild(img)  // reader.result为获取结果
+    }
+  }, false)
+  </script>
+</body>
+
+</html>

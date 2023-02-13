@@ -1,0 +1,136 @@
+<!--
+ * @Author: Topskys
+ * @Date: 2022-10-31 18:48:53
+ * @LastEditTime: 2022-10-31 19:10:08
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js导出txt文件</title>
+</head>
+
+<body>
+    <button onclick="exportTxt('文件名',data)">将js导出为txt文件</button>
+    <script>
+        var data = JSON.stringify({
+                "c": {
+                    "c1": "101010100",
+                    "c2": "beijing",
+                    "c3": "北京",
+                    "c4": "beijing",
+                    "c5": "北京",
+                    "c6": "beijing",
+                    "c7": "北京",
+                    "c8": "china",
+                    "c9": "中国",
+                    "c10": "1",
+                    "c11": "010",
+                    "c12": "100000",
+                    "c13": "116.391",
+                    "c14": "39.904",
+                    "c15": "33",
+                    "c16": "AZ9010",
+                    "c17": "+8"
+                },
+                "f": {
+                    "f1": [
+                        {
+                            "fa": "01",
+                            "fb": "03",
+                            "fc": "10",
+                            "fd": "5",
+                            "fe": "0",
+                            "ff": "0",
+                            "fg": "0",
+                            "fh": "0",
+                            "fi": "06:21|17:40"
+                        },
+                        {
+                            "fa": "07",
+                            "fb": "07",
+                            "fc": "19",
+                            "fd": "12",
+                            "fe": "0",
+                            "ff": "0",
+                            "fg": "0",
+                            "fh": "0",
+                            "fi": "06:22|17:38"
+                        },
+                        {
+                            "fa": "02",
+                            "fb": "00",
+                            "fc": "15",
+                            "fd": "5",
+                            "fe": "8",
+                            "ff": "8",
+                            "fg": "3",
+                            "fh": "1",
+                            "fi": "06:23|17:37"
+                        },
+                        {
+                            "fa": "00",
+                            "fb": "00",
+                            "fc": "16",
+                            "fd": "4",
+                            "fe": "0",
+                            "ff": "0",
+                            "fg": "0",
+                            "fh": "0",
+                            "fi": "06:24|17:35"
+                        },
+                        {
+                            "fa": "00",
+                            "fb": "00",
+                            "fc": "18",
+                            "fd": "7",
+                            "fe": "0",
+                            "ff": "0",
+                            "fg": "0",
+                            "fh": "0",
+                            "fi": "06:25|17:34"
+                        },
+                        {
+                            "fa": "00",
+                            "fb": "01",
+                            "fc": "18",
+                            "fd": "8",
+                            "fe": "0",
+                            "ff": "0",
+                            "fg": "0",
+                            "fh": "0",
+                            "fi": "06:26|17:32"
+                        },
+                        {
+                            "fa": "01",
+                            "fb": "01",
+                            "fc": "16",
+                            "fd": "6",
+                            "fe": "0",
+                            "ff": "0",
+                            "fg": "0",
+                            "fh": "0",
+                            "fi": "06:27|17:31"
+                        }
+                    ],
+                    "f0": "201310121100"
+                }
+            }
+)
+        function exportTxt(name, data) {
+            let e = new MouseEvent("click");// 监听鼠标触发onclick事件的实例
+            let export_blob = new Blob([data]);// Blob是js一个不可变的、原始数据的类似文件对象
+            // 创建带有指定命名空间的元素节点
+            let save_link = document.createElementNS("http://www.w3.org/1999/xhtml", "a");
+            let url_object = window.URL || window.webkitURL || window;
+            // 根据传入参数创建一个指向该参数对象的URL
+            save_link.href = url_object.createObjectURL(export_blob);
+            save_link.download = name; save_link.dispatchEvent(e);
+        }
+    </script>
+</body>
+
+</html>

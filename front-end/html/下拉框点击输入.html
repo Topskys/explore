@@ -1,0 +1,62 @@
+<!--
+ * @Author: Topskys
+ * @Date: 2022-11-03 11:56:47
+ * @LastEditTime: 2022-11-03 14:43:40
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>下拉框点击输入</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: seagreen;
+        }
+
+
+
+        .search-wrapper>input {
+            width: 220px;
+            padding: 10px;
+        }
+
+        .search-result {
+            overflow: auto;
+            /* transition 不支持height */
+            transition: max-height 0.3s;
+            max-height: 0px;
+            width: 243px;
+            background-color: #fff;
+        }
+
+        /* :focus-within 伪类选择器，它表示一个元素获得焦点，或，该元素的后代元素获得焦点 */
+        .search-wrapper:focus-within .search-result,
+        .search-result:hover {
+            max-height: 50vh;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="search-wrapper">
+        <input placeholder="Search...">
+        <div class="search-result">
+            <div onclick="console.log(1)">结果1</div>
+            <div onclick="console.log(2)">结果2</div>
+            <div onclick="console.log(3)">结果3</div>
+            <div onclick="console.log(4)">结果4</div>
+            <div onclick="console.log(5)">结果5</div>
+        </div>
+    </div>
+</body>
+
+</html>

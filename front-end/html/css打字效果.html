@@ -1,0 +1,45 @@
+<!--
+ * @Author: Topskys
+ * @Date: 2022-10-31 17:41:06
+ * @LastEditTime: 2022-10-31 17:51:18
+ * 快速新建html默认模板 !+Tab
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS打字效果</title>
+    <style>
+        .container {
+            width: 16ch;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 3px solid;
+            font-size: 2em;
+            animation: start 3s steps(16), end .5s step-end infinite alternate;
+        }
+
+        @keyframes start {
+            from {
+                width: 0;
+            }
+        }
+
+        @keyframes end {
+            50% {
+                border-color: transparent;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        This is SpringBoot
+    </div>
+</body>
+
+</html>

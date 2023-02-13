@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+
+			.box {
+				width: 50%;
+				height: 2000px;
+				margin: 0 auto;
+			}
+		</style>
+
+	</head>
+	<body>
+		<div class="box"></div>
+		<!-- ctrl+k HB格式化-->
+		<script>
+			//节流
+			//需求：控制函数执行的频率
+			//思路：
+			//1.添加状态变量
+			//2.当函数在执行之后一段时间内不能再次执行
+			//3.根据状态判断函数是否执行
+
+			//封装一个可以减少事件触发频率的函数
+			function slowly(callback, delay) {
+				let state = false;
+				return function run() {
+					if (state) return;
+					callback();
+					state = true;
+					setTimeout(() => {
+						state = false;
+					}, delay);
+				}
+			}
+
+			function sayHello() {
+				console.log("Hello,节流!");
+			}
+
+			let slow = slowly(sayHello, 5000);
+
+			//窗口滚动事件，滚动触发
+			window.onscroll = () => {
+				console.log("检测到滚动条被触发");
+				slow();
+			}
+		</script>
+	</body>
+</html>
