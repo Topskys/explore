@@ -2,7 +2,7 @@
  * @Author: Topskys
  * @Date: 2022-12-24 21:33:44
  * @LastEditTime: 2022-12-24 21:56:09
- * mongoose数据库连接模块
+ * MongoDB数据库连接模块
  * npm i mongoose --save
  */
 
