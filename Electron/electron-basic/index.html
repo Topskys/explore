@@ -1,0 +1,40 @@
+<!--
+ * @Author: Topskys
+ * @Date: 2022-11-29 20:22:46
+ * @LastEditTime: 2022-11-30 13:49:36
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--  暂时关闭安全警告 方法2 'self' 换为*则表示访问外部资源-->
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self';img-src * data:;script-src 'self';style-src 'self' 'unsafe-inline'" />
+    <link rel="stylesheet" href="./app.css">
+    <title>Document</title>
+</head>
+
+<body>
+    Hello Electron
+
+    <!-- <input style=" -webkit-app-region: no-drag;" type="range" name="range" min="'0" max="10" placeholder="0" /> -->
+    <button id="btn">send</button>
+    <button id="btn2">copy</button>
+    <button id="btn3">capture</button>
+    <button id="btn4">testNativeImage</button>
+    <img id="img" src="#" alt="" />
+    <!-- <div>
+        <img src="https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE4wqHW?ver=f338/100/100"
+            alt="">
+    </div> -->
+    <div>
+        <a target="_blank" href="https://www.kancloud.cn/wizardforcel/electron-doc/137776">electron</a>
+    </div>
+
+    <script src="./renderer/app.js"></script>
+</body>
+
+</html>

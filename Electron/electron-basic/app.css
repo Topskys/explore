@@ -1,0 +1,11 @@
+html{
+    /* height: 100%; */
+}
+
+body{
+    /* 用户不可选 */
+    /* user-select: none; */
+    /* 拖动body可移动应用位置 */
+    -webkit-app-region: drag;
+    /* height: 100%; */
+}
