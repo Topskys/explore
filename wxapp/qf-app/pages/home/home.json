@@ -1,0 +1,7 @@
+{
+    "usingComponents": {
+        "m-search":"../../componets/search/search"
+    },
+    "navigationBarTitleText": "主页",
+    "enablePullDownRefresh": true
+}

@@ -1,0 +1,26 @@
+/* pages/searchlist/searchlist.wxss */
+
+.goods{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.good{
+    width: 50%;
+    padding:20rpx;
+    box-sizing: border-box;
+    text-align: left;
+}
+
+.sort-bar{
+    display: flex;
+    align-items: center;
+}
+
+.sort-bar>view{
+    flex: 1;
+    height: 80rpx;
+    line-height: 80rpx;
+    text-align: center;
+    border: 1rpx solid #eee ;
+}

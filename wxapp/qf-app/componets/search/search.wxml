@@ -1,0 +1,11 @@
+<!--componets/search/search.wxml-->
+<!-- <view class="input-box1">
+    <input type="text" placeholder="请输入..." bindtap="handleTap"  class="input"/>
+</view> -->
+
+<!-- or -->
+<mp-sticky>
+    <view class="input-box2">
+        <input type="text" placeholder="请输入..." bindtap="handleTap" class="input"/>
+    </view>
+</mp-sticky>

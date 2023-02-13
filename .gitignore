@@ -1,6 +1,9 @@
 .DS_Store
 node_modules
-dist
+# dist
+.idea
+.vscode
+
 
 
 # local env files
@@ -26,7 +29,6 @@ yarn.lock
 package-lock.json
 
 # Editor directories and files
-.idea
 .vscode
 *.suo
 *.ntvs*
@@ -45,6 +47,96 @@ src/.umi-test
 coverage
 
 # production
-build
+/build
+
+
+
+
+
+
+
+
+# back-end
+
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/nbdist/
+/.nb-gradle/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+
+
+
+# TypeScript
+package-lock.json
+tests/**/coverage/
+
+# Editor directories and files
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+
+
+
+# Nest.js
+
+
+# Logs
+logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Tests
+/coverage
+/.nyc_output
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+
+
 
 

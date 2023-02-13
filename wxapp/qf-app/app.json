@@ -1,0 +1,57 @@
+{
+    "pages": [
+        "pages/home/home",
+        "pages/category/category",
+        "pages/shopCart/shopCart",
+        "pages/mine/mine",
+        "pages/detail/detail",
+        "pages/search/search",
+        "pages/searchlist/searchlist",
+        "pages/auth/auth",
+        "pages/telform/telform"
+    ],
+    "window": {
+        "backgroundTextStyle": "dark",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "Weixin",
+        "navigationBarTextStyle": "black"
+    },
+    "tabBar": {
+        "custom": false,
+        "color": "#666666",
+        "selectedColor": "#000000",
+        "backgroundColor": "#ffffff",
+        "borderStyle": "black",
+        "list": [
+            {
+                "pagePath": "pages/home/home",
+                "text": "Home",
+                "iconPath": "images/home.png",
+                "selectedIconPath": "images/home-active.png"
+            },
+            {
+                "pagePath": "pages/category/category",
+                "text": "Category",
+                "iconPath": "images/category.png",
+                "selectedIconPath": "images/category-active.png"
+            },
+            {
+                "pagePath": "pages/shopCart/shopCart",
+                "text": "ShopCart",
+                "iconPath": "images/cart.png",
+                "selectedIconPath": "images/cart-active.png"
+            },
+            {
+                "pagePath": "pages/mine/mine",
+                "text": "Mine",
+                "iconPath": "images/mine.png",
+                "selectedIconPath": "images/mine-active.png"
+            }
+        ]
+    },
+    "style": "v2",
+    "sitemapLocation": "sitemap.json",
+    "useExtendedLib": {
+        "weui": true
+    }
+}

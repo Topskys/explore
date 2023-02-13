@@ -1,0 +1,17 @@
+<!--pages/home/home.wxml-->
+<view class="home">
+    <swiper indicator-dots autoplay>
+        <swiper-item wx:for="{{looplist}}" wx:key="index">
+            <image src="{{item.url}}" mode="widthFix"></image>
+        </swiper-item>
+    </swiper>
+    <m-search bindevent="handleEvent"></m-search>
+    <view class="goodbox" wx:for="{{goods}}" wx:key="index" bindtap="handleChangePage" data-id="{{item.id}}" data-title="{{item.title}}">
+        <image src="{{item.poster}}" mode="widthFix"></image>
+        <view class="goodInfo">
+            <view class="title">{{item.title}}</view>
+            <view class="price">价格：{{item.price}}</view>
+            <view class="goodcomment">好评率：{{item.goodcomment}}</view>
+        </view>
+    </view>
+</view>

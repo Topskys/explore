@@ -1,0 +1,36 @@
+/* pages/home/home.wxss */
+
+swiper{
+    height: 297rpx;
+}
+
+swiper image{
+    width: 100%;
+}
+
+.goodbox{
+    padding: 20rpx;
+    /* BFC 清除浮动 */
+    overflow: hidden;
+}
+
+.goodbox image{
+    width: 200rpx;
+    float: left;
+    padding-right: 20rpx;
+}
+
+.goodbox .title{
+    font-size: 28rpx;
+}
+
+.goodbox .price{
+color: orangered;
+font-weight: bold;
+padding: 5rpx 0;
+}
+
+.goodbox .goodcomment{
+    color: #aaa;
+    font-size: 24rpx;
+}
