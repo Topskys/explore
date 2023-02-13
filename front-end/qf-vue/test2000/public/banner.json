@@ -1,0 +1,56 @@
+{
+    "status": 0,
+    "banner": [{
+            "bannerId": 415,
+            "actionType": 22,
+            "actionData": "{\"businessId\":\"5875\"}",
+            "imgUrl": "https://static.maizuo.com/v5/upload/b4eacc3e37c6559cd1f8b8bf02cc3de7.jpg",
+            "masterTitle": "",
+            "slaveTitle": "",
+            "displayOrder": 0,
+            "bindBusinessId": "",
+            "cityIds": "0",
+            "name": "花束般的恋爱",
+            "displayTimes": 0,
+            "slaveImgUrl": "",
+            "startTime": "1645459200",
+            "endTime": "1648742399",
+            "businessId": ""
+        },
+        {
+            "bannerId": 414,
+            "actionType": 22,
+            "actionData": "{\"businessId\":\"5865\"}",
+            "imgUrl": "https://static.maizuo.com/v5/upload/7f69e0a2f24fea415f83166a2cbecde4.jpg",
+            "masterTitle": "",
+            "slaveTitle": "",
+            "displayOrder": 0,
+            "bindBusinessId": "",
+            "cityIds": "0",
+            "name": "我们的冬奥",
+            "displayTimes": 0,
+            "slaveImgUrl": "",
+            "startTime": "1645459200",
+            "endTime": "1648742399",
+            "businessId": ""
+        },
+        {
+            "bannerId": 413,
+            "actionType": 22,
+            "actionData": "{\"businessId\":\"5872\"}",
+            "imgUrl": "https://static.maizuo.com/v5/upload/db00f522eb0683d27e166f13a25d436e.jpg",
+            "masterTitle": "",
+            "slaveTitle": "",
+            "displayOrder": 0,
+            "bindBusinessId": "",
+            "cityIds": "0",
+            "name": "尼罗河上的惨案",
+            "displayTimes": 0,
+            "slaveImgUrl": "",
+            "startTime": "1645459200",
+            "endTime": "1648742399",
+            "businessId": ""
+        }
+    ],
+    "msg": "success"
+}
