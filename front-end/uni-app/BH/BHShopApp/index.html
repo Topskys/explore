@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<script>
+			var coverSupport = 'CSS' in window && typeof CSS.supports === 'function' && (CSS.supports('top: env(a)') ||
+				CSS.supports('top: constant(a)'))
+			document.write(
+				'<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0' +
+				(coverSupport ? ', viewport-fit=cover' : '') + '" />')
+		</script>
+		<title></title>
+		<!--preload-links-->
+		<!--app-context-->
+		<style>
+			* {
+				background-color: aliceblue;
+			}
+
+			#app {
+				width: 400px;
+				height: 400px;
+				margin: 0 auto;
+				background-color: aquamarine;
+				border-radius: 12px;
+				border: 0;
+				/* margin: 0 -16px; */
+				padding: 12px 16px;
+				/* width: auto; */
+				box-shadow: 0 2px 5px 0 rgb(0 0 0 / 10%);
+				-webkit-box-shadow: 0 2px 5px 0 rgb(0 0 0 / 10%);
+				-moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1);
+				-o-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1);
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+
+			<!--app-html-->
+
+
+			box-shadow 阴影
+		</div>
+		<script>
+			// JS如何封装一个Ajax请求
+			// 请求方式，请求地址，请求参数，请求参数的类型
+			// 返回请求结果
+			function ajax(options) {
+				// 创建XMLHttpRequest对象
+				const xhr = new XMLHttpRequest()
+				// 初始化参数的内容
+				options = options || {}
+				options.type = (options.type || 'GET').toUpperCase()
+				options.dataType = options.dataType || 'json'
+				const params = options.data
+				// 发送请求
+				if (options.type === 'GET') {
+					// 第三个参数是async：布尔值，是否异步执行请求
+					xhr.open('GET', options.url + "?" + getParams(params), true)
+					xhr.send(null)
+				} else if (options.type === 'POST') {
+					xhr.open('POST', options.url, true)
+					xhr.send(params)
+				}
+				// 接收请求
+				xhr.onreadystatechange = function() {
+					if (xhr.status >= 200 && xhr.status < 300) {
+						// responseText 字符串形式的响应式数据
+						// response XML形式的响应式数据
+						options.success(xhr.responseText, xhr.response)
+					} else {
+						options.fail("参数错误" + status)
+					}
+				}
+			}
+
+			// 使用ajax
+			ajax({
+				type: 'gte',
+				dataType: 'json',
+				data: {
+					limit: 10,
+					age: 18,
+				},
+				url: 'localhost:8888',
+				success: function(text, xml) {
+					console.log(JSON.parse(text), xml)
+				},
+				fail: function(status) {
+					console.log(status)
+				}
+			})
+			// 处理请求参数
+			function getParams(data) {
+				let arr = []
+				for (let key in data) {
+					arr.push(`${key}=${data[key]}`)
+				}
+				// console.log(arr)
+				// 使用&拼接
+				return arr.join('&')
+			}
+		</script>
+	</body>
+</html>

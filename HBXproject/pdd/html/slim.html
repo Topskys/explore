@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		.div1{
+			height: 400px;
+			background-color: #008B8B;
+		}
+		.div2{
+			height: 500px;
+			background-color: #3498DB;
+		}
+		.box{
+			width: 162px;
+			height: 210px;
+			background-color: white;
+			position: fixed;/*固定*/
+			bottom: 150px;
+			left: -81px;
+		}
+		.box:hover{
+			left: 0;
+		}
+		.box .box1{
+			margin: 8px;
+			border: 2px solid #FFEDF1;
+			padding: 20px 15px 8px;
+		}
+		.box .box1 img{
+			width: 100%;
+			height: 100%;
+			display: block;/*文字会进入存二维码框内*/
+		}
+		.box .box1 .box2{
+			color: #666666;
+			margin-top: 10px;
+			font-size: 14px;
+			text-align: center;
+		}
+		</style>
+	</head>
+	<body>
+		<div class="div1"></div>
+		<div class="div2"></div>
+		<div class="box">
+			<div class="box1">
+				<img src="../img/slim.png" alt="" title="">
+				<div class="box2">
+					<div>微信扫码下载</div>
+					<div>App专享优惠</div>
+				</div>
+			</div>
+			
+		</div>
+		
+	</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>自定义滤镜实现液体加载</title>
+		<style type="text/css">
+			* {
+				/* 清除页面内外边距 */
+				margin: 0;
+				padding: 0;
+			}
+
+			body {
+				/* 弹性布局，水平垂直居中 */
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				/* 100%窗口高度 */
+				height: 100vh;
+				background-color: #222;
+			}
+
+			.loading {
+				/* 相对定位 */
+				position: relative;
+				width: 200px;
+				height: 200px;
+				/* 使用自定义滤镜 */
+				filter: url(#gooey);
+			}
+
+			.loading>span {
+				/* 绝对定位 */
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				display: block;
+				/*执行am-loading动画：名称，时长，加速后减速，无限次播放 */
+				animation: am-loading 4s ease-in-out infinite;
+				/* 动画延迟，var调用自定义属性--i，计算延迟的时间 */
+				animation-delay: calc(0.2s * var(--i));
+
+			}
+
+			.loading>span::before {
+				content: "";
+				position: absolute;
+				top: 0;
+				left: calc(50%-20px);
+				width: 40px;
+				height: 40px;
+				border-radius: 50%;
+				background: linear-gradient(#d1f5ff, #1683ff);
+				/* 添加阴影效果 */
+				box-shadow: 0 0 30px #1683ff;
+			}
+
+			/* 自定义animate动画名为am-loading */
+			@keyframes am-loading {
+				0% {
+					transform: rotate(0deg);
+				}
+
+				50%,100%{
+					transform: rotate(360deg);
+				}
+			}
+
+			svg {
+				/* 隐藏svg */
+				width: 0;
+				height: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="loading">
+			<!-- --i是自定义属性，可用var函数调用 -->
+			<span style="--i:1;"></span>
+			<span style="--i:2;"></span>
+			<span style="--i:3;"></span>
+			<span style="--i:4;"></span>
+			<span style="--i:5;"></span>
+			<span style="--i:6;"></span>
+			<span style="--i:7;"></span>
+		</div>
+		
+		<svg>
+		    <!-- filter用来定义svg滤镜 -->
+			<filter id="gooey">
+			    <!-- feGaussianBlur用于创建模糊滤镜的元素 -->
+				<feGaussianBlur in="SourceGraphic" stdDeviation="1"></feGaussianBlur>
+				<!-- <feColorMatrix>是过滤中的一种类型，
+				使用矩阵影响颜色的每个通道（基于RGBA），
+				可将其想象成Photoshop中的通道编辑一样 -->
+				<feGaussianBlur value="
+				    1 0 0 0 0
+					0 1 0 0 0
+					0 0 1 0 0
+					0 0 0 20 10
+				"></feGaussianBlur>
+			</filter>
+		</svg>
+	</body>
+</html>

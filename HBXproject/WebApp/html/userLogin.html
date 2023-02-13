@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" href="#图标">
+		<link rel="stylesheet" href="../css/userLogin.css">
+		<script src="../js/tools.js"></script>
+		<style>
+		.container .title{
+			width: 300px;
+			height: 200px;
+			line-height: 200px;
+		}
+		.container .title .title-text{
+			font-size: 20px;
+			text-align: center;
+			font-family: Verdana, Geneva, Tahoma, sans-serif;
+		}
+		.container .input-box{
+			width: 300px;
+			height: 60px;
+			text-align: center;
+			line-height: 60px;
+		}
+		.container .input-box .input{
+			width: 95%;
+			height: 40px;
+			border: 1px solid skyblue;
+			border-radius: 5px;
+			background-color: #F9FAFB;
+			padding-left: 5%;
+		}
+		.container .checkbox{
+			height: 30px;
+			line-height: 30px;
+			font-size: 16px;
+			margin-bottom: 80px;
+		}
+		
+		.container .submit{
+			height: 40px;
+			width: 300px;
+			background-color: limegreen;
+			border: 1px solid gray;
+			border-radius: 5px;
+			margin-bottom: 80px;
+		}
+		
+		.container .regSpan{
+			height: 60px;
+			width: 300px;
+			border-radius: 5px;
+		}
+		.container .regSpan span{
+			line-height: 60px;
+		}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<form action="" method="post">
+				
+				<div class="title">
+					<h2 class="title-text" >登&nbsp;&nbsp;录</h2>
+				</div>
+				
+				<div class="input-box">
+					<input type="text" id="userName" class="input" placeholder="请输入账户"/>
+				</div>
+				
+				<div class="input-box">
+					<input type="text" id="userPassword" class="input" placeholder="请输入密码"/>
+				</div>
+				
+				<div class="checkbox">
+					<input type="checkbox" name="" id="remember" style="margin-left: 10px;" />
+					<label for="remember" style="margin-right: 95px; ">remember me</label>
+					<input type="checkbox" name="" id="forget" />
+					<label for="forget" class="forget">forget</label>
+				</div>
+				
+				<div class="submit">
+					<input type="submit" value="登录" id="submit" class="submit">
+				</div>
+				
+				<div class="regSpan">
+					<span>还没有注册？</span>
+					<a href="userRegister.html">注册</a>
+				</div>
+				
+				<div class="rightSpan">
+					<span></span>
+				</div>
+	
+			</form>
+		</div>
+	</body>
+</html>

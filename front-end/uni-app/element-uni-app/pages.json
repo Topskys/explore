@@ -1,0 +1,115 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/home/index",
+			"style": {
+				"enablePullDownRefresh": true,
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+
+		}, {
+			"path": "pages/order/index",
+			"style": {
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+
+		},
+		{
+			"path": "pages/order-detail/index",
+			"style": {
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+
+		},
+		{
+			"path": "pages/center/index",
+			"style": {
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"titleNView": false
+				}
+
+
+			}
+		},
+		{
+			"path": "pages/login/index",
+			"style": {
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"titleNView": false
+				}
+
+			}
+		}, {
+			"path": "pages/shop/index",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/shop-detail/index",
+			"style": {
+				"navigationBarTitleText": "商家详情",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/pay/index",
+			"style": {
+				"navigationBarTitleText": "确认订单",
+				"enablePullDownRefresh": false
+			}
+
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+		// "usingComponents": {
+		// 	"van-button": "/wxcomponents/vant/dist/button/index"
+		// }
+	},
+	//底部tapBar
+	"tabBar": {
+		"color": "rgba(0, 0, 0, 0.9)",
+		"fontSize": "10px",
+		"selectedColor": "rgb(2, 182, 253)",
+		"height": "62.79px",
+		"list": [{
+				"text": "首页",
+				"pagePath": "pages/home/index",
+				"iconPath": "https://gw.alicdn.com/imgextra/i2/O1CN01Ha8S2d20YqXK6PTsj_!!6000000006862-2-tps-60-60.png",
+				"selectedIconPath": "https://gw.alicdn.com/imgextra/i4/O1CN01mjuUty294SnxayJFo_!!6000000008014-2-tps-60-60.png"
+			},
+			// {
+			// 	"text": "天天福利",
+			// 	"pagePath": "pages/news/news",
+			// 	"iconPath": "./static/logo.png",
+			// 	"selectedIconPath": "./static/logo.png"
+			// }, 
+			{
+				"text": "订单",
+				"pagePath": "pages/order/index",
+				"iconPath": "https://gw.alicdn.com/imgextra/i1/O1CN01VLnmhL1lrslLwg40n_!!6000000004873-2-tps-60-60.png",
+				"selectedIconPath": "https://gw.alicdn.com/imgextra/i1/O1CN01iKM20L1qbv2M58c8m_!!6000000005515-2-tps-60-60.png"
+			}, {
+				"text": "我的",
+				"pagePath": "pages/center/index",
+				"iconPath": "https://gw.alicdn.com/imgextra/i4/O1CN01YPwarQ1VVPTfvzwtI_!!6000000002658-2-tps-60-60.png",
+				"selectedIconPath": "https://gw.alicdn.com/imgextra/i2/O1CN01OCKkCF24I8Y1skoy3_!!6000000007367-2-tps-60-60.png"
+			}
+		]
+	}
+}

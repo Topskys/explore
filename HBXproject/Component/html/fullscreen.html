@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<!-- 准备一个按钮 -->
+		<button class="fullscreen" onclick="fullScreen()">全屏</button>
+
+		<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+		<script>
+			//定义一个变量进行判断，默认false 非全屏状态
+			let exitFullscreen = false
+			// var button1=document.getElementsByClassName(".fullscreen");
+			// var button1 = document.querySelector("button"); //获取第一个button
+			var button1 = document.getElementsByTagName("button")[0];//获取第一个button
+			function exitFSTxt() {
+				button1.innerHTML = "退出";
+			}
+
+			function enterFSTxt() {
+				button1.innerHTML = "全屏";
+			}
+			// 全屏事件
+			function fullScreen() {
+				let element = document.documentElement;
+
+				if (this.fullscreen) {
+					if (document.exitFullscreen) {
+						document.exitFullscreen();
+						this.fullscreen = !this.fullscreen;
+						enterFSTxt();
+
+					} else if (document.webkitCancelFullScreen) {
+						document.webkitCancelFullScreen();
+						this.fullscreen = !this.fullscreen;
+						enterFSTxt();
+					} else if (document.mozCancelFullScreen) {
+						document.mozCancelFullScreen();
+						this.fullscreen = !this.fullscreen;
+						enterFSTxt();
+					} else if (document.msExitFullscreen) {
+						document.msExitFullscreen();
+						this.fullscreen = !this.fullscreen;
+						enterFSTxt();
+					}
+				} else {
+					if (element.requestFullscreen) {
+						element.requestFullscreen();
+						this.fullscreen = !this.fullscreen;
+						exitFSTxt();
+					} else if (element.webkitRequestFullScreen) {
+						element.webkitRequestFullScreen();
+						this.fullscreen = !this.fullscreen;
+						exitFSTxt();
+					} else if (element.mozRequestFullScreen) {
+
+						element.mozRequestFullScreen();
+						this.fullscreen = !this.fullscreen;
+						exitFSTxt();
+					} else if (element.msRequestFullscreen) {
+						// IE11
+						element.msRequestFullscreen();
+						this.fullscreen = !this.fullscreen;
+						exitFSTxt();
+					}
+				}
+			}
+		</script>
+	</body>
+</html>

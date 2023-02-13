@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+    <title>Document</title>
+    <style>
+	html,body{
+		font-size: 65.5%;
+		width: 100%;
+	}
+	
+        .main {
+            width: 37.5rem;
+            height: 37.5rem;
+            border: 1px solid red;
+            margin: 6.25rem auto;
+            /* 网格布局，grid是块级网格布局（垂直），inline-grid是行内网格布局（水平） */
+            display: grid;
+            /* display: inline-grid; */
+			/* 三行三列 */
+			/* grid-template-columns: 1fr 2fr 1fr; */
+			/* grid-template-columns: 30% auto 6.25rem; */
+			/* repeat(redos,  Wids/Heis,...) */
+			grid-template-rows: repeat(3,100px);
+			grid-template-columns: repeat(3,100px);
+			/* 行列间距 */
+			/* grid-column-gap:1.25rem;
+			grid-row-gap:1.25rem; */
+			/* grid-gap:1.25rem; */
+			/* gap:1.25rem; */
+			/* grid-template-columns: 30fr 70fr;
+			grid-template-rows: 100%; */
+			
+			/* 整个表格在容器里面的对齐方式start/end/space-between/ space-around/space-evenly  */
+			/* justify-content: center;
+			align-content: center; */
+			place-content:start space-between;
+			
+			/* 项目在单元格中水平、垂直对齐方式，start/center/end/stretch表拉伸站满单元格 */
+			/* 对齐方式合体place-items:垂直 水平; */
+			/* justify-items:stretch; align-items: center; */
+			
+			place-items: center  center;
+			
+			
+			/* 第二种：  通过命名来挑选项目的单元格位置 name-start   name-end   为每个单元个取名字，为项目指定位置单元格使用，a a 是一个区域， .表不需要利用不用命名 */
+			
+			grid-template-areas: 
+			"a a c"
+			"d e f"
+			"g . i"			   
+			;               
+        }
+		
+		
+		.item{
+			/* width: 100%;
+			height: 100%; */
+			width: 50%;
+			height: 50%;
+			border: 1px solid blue;
+		}
+		
+		/* 第二种： 控制某一个项目在表格中的哪一个单元  row startIndex  col startIndex    row endIndex    col endIndex */
+		
+		.item:nth-child(1){
+			background: greenyellow;
+			
+			/* grid-row-start: e-start;
+			grid-row-end: e-end;
+			grid-column-start: e-start;
+			grid-column-end: e-end; */
+			
+			/* grid-row: e-start/e-end;
+			grid-column: e-start/e-end; */
+			
+			/* grid-row: e;
+			grid-column: e; */
+			
+			/* grid-row-start: 2;
+			grid-row-end: 3;
+			grid-column-start: 2;
+			grid-column-end: 3; */
+			
+			/* 第三种： */
+			/* grid-area: a; */
+			
+			/* 单元格中的项目对齐方式 */
+			align-self: start;
+			justify-self: start;
+		}	
+		
+    </style>
+</head>
+
+<body>
+    <!-- <span>span</span> -->
+    <!-- <span class="main">容器</span> -->
+	<div class="main">
+		<!-- <div class="lef">left</div>
+		<div class="right">right</div> -->
+		<div class="item">1</div>
+		<div class="item">2</div>
+		<div class="item">3</div>
+		<div class="item">4</div>
+		<div class="item">5<i class="fa fa-area-chart" style="font-size:48px;color:red"></i></div>
+
+		<div class="item">6</div>
+		<div class="item">7</div>
+		<div class="item">8</div>
+		<!-- <div class="item">9</div> -->
+	</div>
+</body>
+
+</html>

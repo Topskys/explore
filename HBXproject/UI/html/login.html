@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!--https://www.bilibili.com/video/BV1qQ4y1Y7DC?spm_id_from=444.41.0.0-->
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.11.2/css/all.css" />
+		<title></title>
+		<style>
+		:root{
+			--blue:#2980b9;
+			--light-blue:#ecf4f9;
+			--border:1px solid rgba(0,0,0,.1);
+		}
+		*{
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+			outline: none;
+			border: none;
+			text-decoration: none;
+			text-transform: capitalize;
+			font-weight: normal;
+			font-family: Verdana, Geneva, Tahoma, sans-serif;
+		}
+		.container{
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 20px;
+			padding-bottom: 70px;
+			background-color: #f0f3f5;
+			min-height: 100vh;
+		}
+		.container form{
+			width: 600px;
+			box-shadow: 0 10px 15px rbga(0,0,0,.1);
+			border-radius: 5px;
+			overflow: hidden;
+			text-align: center;
+		}
+		.container form .text{
+			background-color: #fff;
+			padding: 30px 15px;
+		}
+		.container form .title-text{
+			font-size: 18px;
+			
+			padding-bottom: 15px;
+			color: black;
+			
+		}
+		
+		
+		.container form .input-box{
+			padding: 30px;
+			background: var(--light-blue);
+		}
+		.container form .input-box .input{
+			margin: 15px auto;
+			display: flex;
+			align-items: center;
+			height: 50px;
+			width: 100%;
+			border-radius: 5px;
+			background: #fff;
+			box-shadow: 0 5px 10px rgba(0,0,0,.1);
+			border: var(--border);
+		}
+		.container form .input-box .input input{
+			height: 100%;
+			width: 100%;
+			padding: 10px;
+			font-size: 16px;
+			color: #333;
+			text-transform: none;
+		}
+		.container form .input-box .input span{
+			color: #999;
+			padding-right: 5px;
+			padding-left: 15px;
+			font-size: 20px;
+		}
+		.container form .checkbox{
+			text-align: left;
+			padding: 10px 0;
+			
+		}
+		.container form .checkbox label{
+			font-size: 17px;
+			color: #333;
+			cursor: pointer;
+			/*background-color: var(--light-blue);*/
+		}
+		.container form .sign-in-btn{
+			padding: 10px 40px;
+			margin-top: 10px;
+			font-size: 17px;
+			color: #fff;
+			border-radius: 5px;
+			background: var(--blue);
+			cursor: pointer;
+			transition: .2s linear;
+		}
+		.container form .sign-in-btn:hover{
+			letter-spacing: 2px;
+		}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<form action="" method="post">
+				
+				<div class="text">
+					<h3 class="title-text">登录</h3>
+				</div>
+				
+				<div class="input-box">
+					<h3 class="title">or sign in with email</h3>
+					<div class="input">
+						<span class="far fa-envelope"></span>
+						<input type="email" name="" placeholder="email" id="" />
+					</div>
+				</div>
+				<div class="input-box">
+					<div class="input">
+						<span class="fab fa-lock"></span>
+						<input type="password" name="" placeholder="password" id="" />
+					</div>
+				</div>
+				
+				<div class="checkbox">
+					<input type="checkbox" name="" id="remember" />
+					<label for="remember">remember me</label>
+				</div>
+				
+				<input type="submit" value="sign in" class="sign-in-btn"/>
+			</form>
+		</div>
+	</body>
+</html>

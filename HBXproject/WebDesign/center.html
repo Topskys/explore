@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.11.2/css/all.css" />
+		<style type="text/css">
+			body {
+				margin: 0;
+				padding: 0;
+			}
+
+			ul {
+				padding-left: 0;
+			}
+
+			li {
+				list-style: none;
+			}
+
+			img {
+				display: block;
+			}
+
+			.parent-banner {
+				display: flex;
+				width: 75rem;
+				margin: 0 auto;
+				/* 父盒子居中 */
+				justify-content: center;
+				/* 子盒子水平居中 */
+				align-items: flex-start;
+				/* 子盒子垂直居中 */
+				flex-wrap: wrap;
+				/* 换行 */
+			}
+
+			.banner {
+				width: 75%;
+				height: 18.75rem;
+				overflow: hidden;
+				background-color: #337AB7;
+			}
+
+			.headline {
+				width: 25%;
+				height: 18.75rem;
+			}
+
+			.imgList {
+				position: relative;
+				width: 100%;
+				height: 18.75rem;
+				align-items: center;
+				overflow: hidden;
+			}
+
+			.imgList li {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				transition: .5s;
+			}
+
+			.imgList ul {
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+				margin-top: 0;
+			}
+
+			.li1 {
+				z-index: 2;
+				transform: scale(0.81);
+				transform-origin: 0% 100%;
+				/*变化原点*/
+			}
+
+			.li2 {
+				transform: translateX(0px);
+				/* //235px */
+				z-index: 3;
+			}
+
+			.li3 {
+				transform: translateX(0px) scale(0.81);
+				/* 730px */
+				z-index: 2;
+				transform-origin: 0% 100%;
+			}
+
+			.li4 {
+				transform: translateX(0px) scale(0.81);
+				/* 965px */
+				transform-origin: 100% 100%;
+			}
+
+			.li5 {
+				transform: translateX(0px) scale(0.81);
+				/* 1165px */
+				transform-origin: 100% 100%;
+			}
+
+			.li6 {
+				transform: translateX(0px) scale(0.81);
+				/* 1425px */
+				transform-origin: 100% 100%;
+			}
+
+
+			.headline>h4 {
+				padding-left: 1rem;
+				color: #666666;
+			}
+
+			.headline>ul {
+				padding-left: 1rem;
+			}
+			.headline>ul>li{
+				width: 100%;
+				padding:10px;
+				box-shadow: #000000;
+			}
+			.headline>ul>li>a {
+				color: black;
+				text-decoration: unset;
+				color: darkgray;
+				box-shadow: #666666;
+			}
+			.headline>ul>li>i{
+				float: right;
+				color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="parent-banner">
+			<div class="banner">
+
+				<div class="imgList">
+					<ul>
+						<li class="li1"><img src="img/1.jpeg" alt=""></li>
+						<li class="li2"><img src="img/2.jpeg" alt=""></li>
+						<li class="li3"><img src="img/3.jpeg" alt=""></li>
+						<li class="li4"><img src="img/4.jpeg" alt=""></li>
+						<li class="li5"><img src="img/5.jpeg" alt=""></li>
+						<li class="li6"><img src="img/6.jpeg" alt=""></li>
+					</ul>
+				</div>
+
+				<div class="nvaList">
+					<span></span>
+					<span></span>
+					<span></span>
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>
+
+			</div>
+
+			<div class="headline">
+				<h4>时事热点</h4>
+				<ul>
+					<li><a href="">5678</a><i class="fas fa-arrow-up"></i></li>
+					<li><a href="">5678</a><i class="fas fa-arrow-up"></i></li>
+					<li><a href="">5678</a><i class="fas fa-arrow-up"></i></li>
+					<li><a href="">5678</a><i class="fas fa-arrow-up"></i></li>
+					<li><a href="">5678</a><i class="fas fa-arrow-up"></i></li>
+					<li><a href="">5678</a><i class="fas fa-arrow-up"></i></li>
+				</ul>
+			</div>
+
+		</div>
+		<script src="js/banner.js"></script>
+	</body>
+</html>

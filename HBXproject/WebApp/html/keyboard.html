@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>键盘</title>
+		<style type="text/css">
+			* {
+				padding: 0;
+				margin: 0;
+				font-family: arial, helvetica, He;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<!-- 输入框 -->
+			<div class="txt">
+				<textarea rows="" cols=""></textarea>
+			</div>
+			<!-- 键盘 -->
+			<div class="keyboard">
+				<div v-for="(item,index) in keytxt">
+					<ul>
+						<li>{{item}}</li>
+					</ul>
+				</div>
+			</div>
+			
+		</div>
+		<!-- "Esc","F1","F2","F3","F4","F5","F6","F7","F8","F9","F10","F11","F12","Del",
+		"~","1","2","3","4","5","6","7","8","9","0","-","+","<--",
+		"Tab","Q","W","E","R","T","Y","U","I","O","P","[","]","\\",
+		"Caps","A","S","D","F","G","H","J","K","L",";","'","Enter",
+		"Shift","Z","X","C","V","B","N","M","<",">","/","Shift",
+		"Ctrl","Fn","Win","Alt","Spance","Alt","Ctrl","<-","O",">" -->
+
+		<!-- <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script> -->
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+		<script type="text/javascript">
+			var App = new Vue({
+				el: ".container",
+				data: {
+					keytxt: [
+						"Esc", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12", "Del",
+						"~", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "+", "<--",
+						"Tab", "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "[", "]", "\\",
+						"Caps", "A", "S", "D", "F", "G", "H", "J", "K", "L", ";", "'", "Enter",
+						"Shift", "Z", "X", "C", "V", "B", "N", "M", "<", ">", "/", "Shift",
+						"Ctrl", "Fn", "Win", "Alt", "Spance", "Alt", "Ctrl", "<-", "O", ">"
+					]
+				},
+				methods: {
+
+				}
+			})
+		</script>
+		
+		
+
+		<!-- 准备一个按钮 -->
+		<button class="fullscreen" onclick="fullScreen()">全屏</button>
+
+		<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+		<script>
+			//定义一个变量进行判断，默认false 非全屏状态
+			let exitFullscreen = false
+			// var button1=document.getElementsByClassName(".fullscreen");
+			// var button1 = document.querySelector("button"); //获取第一个button
+			var button1 = document.getElementsByTagName("button")[0];//获取第一个button
+			
+			function exitFSTxt() {
+				button1.innerHTML = "退出";
+			}
+
+			function enterFSTxt() {
+				button1.innerHTML = "全屏";
+			}
+			// 全屏事件
+			function fullScreen() {
+				let element = document.documentElement;
+
+				if (this.fullscreen) {
+					if (document.exitFullscreen) {
+						document.exitFullscreen();
+						this.fullscreen = !this.fullscreen;
+						enterFSTxt();
+
+					} else if (document.webkitCancelFullScreen) {
+						document.webkitCancelFullScreen();
+						this.fullscreen = !this.fullscreen;
+						enterFSTxt();
+					} else if (document.mozCancelFullScreen) {
+						document.mozCancelFullScreen();
+						this.fullscreen = !this.fullscreen;
+						enterFSTxt();
+					} else if (document.msExitFullscreen) {
+						document.msExitFullscreen();
+						this.fullscreen = !this.fullscreen;
+						enterFSTxt();
+					}
+				} else {
+					if (element.requestFullscreen) {
+						element.requestFullscreen();
+						this.fullscreen = !this.fullscreen;
+						exitFSTxt();
+					} else if (element.webkitRequestFullScreen) {
+						element.webkitRequestFullScreen();
+						this.fullscreen = !this.fullscreen;
+						exitFSTxt();
+					} else if (element.mozRequestFullScreen) {
+
+						element.mozRequestFullScreen();
+						this.fullscreen = !this.fullscreen;
+						exitFSTxt();
+					} else if (element.msRequestFullscreen) {
+						// IE11
+						element.msRequestFullscreen();
+						this.fullscreen = !this.fullscreen;
+						exitFSTxt();
+					}
+				}
+			}
+		</script>
+	</body>
+</html>

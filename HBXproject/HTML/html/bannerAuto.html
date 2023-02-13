@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<style>
+		        *{
+		            padding: 0;
+		            margin: 0;
+		        }
+				#ad{
+				    width:80%px;
+				    height:400px;
+				    position:absolute;
+				}
+		        #ad .img{
+		            width: 100%;
+		            height: 400px;/*350px*/
+		            margin: 20px 0;
+		            object-fit: cover;/*防止图片拉伸*/
+		            box-shadow: 2px 5px 3px 2px #cccccc;
+		        }
+		        #list{
+		            width: 100%;
+		            height: 10px;
+					overflow:hidden;
+					position:absolute;
+					bottom:10px;
+					color:#FFF;
+					margin-left: 39%;
+		        }
+		        #list li{
+		            width: 10px;
+		            height:3px;
+					margin-right: 5px;
+		            border-radius: 5px;
+		            background: #c0c0c0;
+		            float: left;
+					list-style: none;
+		
+		        }
+		        .bg{
+		            background: #f9f2f4!important;
+					margin-bottom: 50px;
+		        }
+		    </style>
+			
+
+	</head>
+	<body>
+		<div id="ad">
+			<img src="../img/1.jpg" id="img" onclick="f()" class="img"/>
+			<ul id="list">
+			    <li class="bg"></li>
+			    <li></li>
+			    <li></li>
+			    <li></li>
+			    <li></li>
+			</ul>
+		</div>
+		
+                <script>
+			        var i = 0;
+			        function f(){
+			            var arr = ["../img/1.jpg","../img/2.jpg","../img/3.png","../img/4.jpg","../img/5.jpg"];
+			            var img = document.getElementById("img");
+			            i++;
+			            if(i>=arr.length){
+			                i=0;
+			            }
+			            img.src=arr[i];
+			            var list = document.getElementById("list");
+			            var li = list.getElementsByTagName("li");
+			            for(var j=0;j<li.length;j++){
+			                li[j].className="";
+			            }
+			            li[i].className="bg";
+			        }
+			        setInterval("f()",5000);
+			    </script>
+	</body>
+</html>

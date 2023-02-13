@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+		body,ul{
+			margin: 0;
+			padding: 0;
+		}
+		ul{
+			padding-left: 0;
+		}
+		li{
+			list-style: none;
+		}
+		img{
+			display: block;
+		}
+		.banner{
+			width: 45%;
+			height: 319px;
+			margin: 80px auto;
+       	    /* background-color: blue; */
+			overflow: hidden;
+		}
+		.imgList{
+			position: relative;
+			width: 100%;
+			height: 18rem;
+			/* background-color: #2ec053; */
+			overflow: hidden;
+		}
+		
+		.nvaList{
+			width: 100%;
+			height: 31px;
+			/* background-color: #e6118b; */
+			text-align: center;
+			
+		}
+		
+		.imgList li{
+			position: absolute;
+			width: 730px;
+			height: 100%;
+			transition: .5s;
+		}
+		.imgList ul{
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+		}
+		
+		.li1{
+			z-index: 2;
+			transform: scale(0.81);
+			transform-origin: 0% 100%;/*变化原点*/
+		}
+		.li2{
+			transform: translateX(0px) ;/* //235px */
+			z-index: 3;
+		}
+		.li3{
+			transform: translateX(530px) scale(0.81);/* 730px */
+			z-index: 2;
+			transform-origin: 0% 100%;
+		}
+		.li4{
+			transform: translateX(765px) scale(0.81);/* 965px */
+			transform-origin: 100% 100%;
+		}
+		.li5{
+			transform: translateX(100px) scale(0.81);/* 1165px */
+			transform-origin: 100% 100%;
+		}
+		.li6{
+			transform: translateX(125px) scale(0.81);/* 1425px */
+			transform-origin: 100% 100%;
+		}
+		
+		.nvaList>span{
+			display: inline-block;/*行内块元素*/
+			width: 35px;
+			height: 3px;
+			background-color: #cccccc;
+			border-radius: 1px;
+		}
+		
+		/* 动画 */
+	    /* .movenva{
+			display: inline-block;/*行内块元素*/
+			/*width: 35px;
+			height: 3px;
+			background-color: red;
+			animation: act3 3s;
+		} */
+		/* @keyframes act1{
+			from{
+				left: 0;
+			}
+			to{
+				left: 300px;
+			}
+		}
+		@keyframes act2{
+			from{
+				margin-left: 0;
+			}
+			to{
+				margin-left: 300px;
+				
+			}
+		} 
+		@keyframes act3{
+			from{
+				transform: translateX(0);
+			}
+			to{
+				transform: translateX(40px);
+			}
+		} */
+		</style>
+	</head>
+	<body>
+		<div class="banner">
+			<div class="imgList">
+				<ul>
+					<li class="li1"><img src="img/1.jpeg" alt=""></li>
+					<li class="li2"><img src="img/2.jpeg" alt=""></li>
+					<li class="li3"><img src="img/3.jpeg" alt=""></li>
+					<li class="li4"><img src="img/4.jpeg" alt=""></li>
+					<li class="li5"><img src="img/5.jpeg" alt=""></li>
+					<li class="li6"><img src="img/6.jpeg" alt=""></li>
+				</ul>
+			</div>
+			<div class="nvaList">
+<!-- 			<div class="movenva"></div> -->
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+		</div>
+		<script type="text/javascript">
+		
+		window.onload=function(){
+			var li=document.querySelectorAll("li");
+			var lis=[];//lis["li1","li2","li3","li4","li5","li6"];
+			
+			for(var obj of li){
+				lis.push(obj.classList[0]);
+				//console.log(obj);
+			}
+			
+			var index=0;//默认第一个按钮编程绿色
+			var span=document.querySelectorAll("span");//所有按钮
+			function setNvaListBColor(){
+				for(var i=0,len=span.length;i<len;i++){
+					span[i].style.background="#ccc";
+				}
+				span[index].style.background="#45c17c";
+			}
+			
+			setNvaListBColor();
+			
+			function nextPic(){
+				lis.unshift(lis[5]);//把数组最后一个名字赋值并插入到第一个位置
+				lis.pop();//删除最后一个值
+				for(var i=0,len=li.length;i<len;i++){
+					li[i].setAttribute("class",lis[i]);
+				}
+				index=index+1;
+				if(index>5){
+					index=0;
+				}
+				setNvaListBColor();
+			}
+			function prePic(){
+				lis.push(lis[0]);//把第一个值放到数组的最后一个位置
+				lis.shift();//删除第一个值
+				for(var i=0,len=li.length;i<len;i++){
+					li[i].setAttribute("class",lis[i]);
+				}
+				index-=1; 
+				if(index<0){
+					index=5;
+				}
+				setNvaListBColor();
+			}
+			
+			var li1=document.querySelector(".li1");
+			var li3=document.querySelector(".li3");
+			/* li1.onclick=function(){
+				prePic();
+			}
+			li3.onclick=function(){//或者直接=nextPic();
+				nextPic();
+			};//事件绑定、监听 */
+			
+			var imgList=document.querySelector(".imgList");
+			
+			imgList.addEventListener("click",function(ev){
+				if(ev.target.parentNode.getAttribute("class")==="li3"){
+					nextPic();
+				}
+				else{
+					if(ev.target.parentNode.getAttribute("class")==="li1"){
+						prePic();
+				    }
+			    }
+			})
+			
+			setInterval(nextPic, 3000);
+			
+		}
+		</script>
+	</body>
+</html>

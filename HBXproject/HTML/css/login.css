@@ -1,0 +1,77 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html{
+	font-size: font-size=62.5%; /1rem=16px*62.5%=10px*/
+	overflow: hidden;
+}
+
+.login-box{
+	display: flex;
+	width: 50vw;/* 1vw=1/100 */
+	/* 父项目水平垂直居中 */
+	margin: 0 auto;
+	background-color: #008B8B;
+	/* 子项目水平垂直居中 */
+	justify-content: center;
+	align-items: center;
+}
+
+.login-box .input-data{
+	display: flex;
+	width: 60%;
+	margin: 0 auto;
+	padding: 2%;
+	box-sizing: border-box;
+	border-radius: 3px;
+	border:  1px solid lightgray;
+	/* 子项目水平垂直居中 */
+	/* justify-content: center;
+	align-items: center; */
+}
+
+.login-box .input-data>input{
+	width: 100%;
+	
+}
+
+.login-box .verifyCode-box{
+	width: 60%;
+	margin: 0 auto;
+	background-color: #0C3483;
+}
+
+.login-box .verifyCode-box .input-verifyCode,img,a{
+	width: 30%;
+	margin: 0 auto;
+}
+
+.login-box .verifyCode-box a{
+	font-size: 0.8rem;
+	text-decoration: none;
+	color: blue;
+}
+
+.login-box .checkbox-box{
+	width: 60%;
+	margin: 0 auto;
+	background-color: red;
+}
+.login-box .checkbox-box>input{
+	font-size: 0.625rem;
+	transform: translateY(-20%);
+}
+.login-box .checkbox-box>label{
+	font-size: 0.625rem;
+	color: #C0C0C0;
+	margin-left: 0.3125rem;
+}
+.login-box .logbtn{
+	width: 60%;
+	border-radius: 3px;
+	font-size: 1rem;
+	transform: translateX(33%);
+}

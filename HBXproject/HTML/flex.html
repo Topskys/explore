@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+		
+		
+		.outer{/*flex容器*/
+			width: 300px;
+			height: 300px;
+			background: goldenrod;
+			margin: 0 auto;
+			display: flex;/*在最外层容器添加，开启flex布局，整个网页看成一个flex容器，所有子容器自动生成容器成员flex项目*/
+			
+			/*项目水平居中*/
+			align-items: center;/* flex-start，默认位置左；center，交叉轴居中排列；flex-end，靠着交叉轴底部对齐；*/
+			justify-content: space-between;/*center，沿着主轴居中对齐；flex-start，靠左对齐；flex-end，靠右对齐；space-between，左右两端对齐，且项目间距相等；space-around，项目间距=左右两边到容器间距的2倍；space-evenly，项目间距=左右两边到容器间距；*/
+			
+			flex-direction: row;/* row，按行排序；row-reverse，项目倒序；column，按列分布；column-reverse，翻转*/
+			flex-wrap: wrap;/* nowrap,当项目总宽度大于flex容器宽度，项目会强行等分容器宽度且不换行; wrap，项目会根据自身进行排列，超出即换行*/
+		}
+		/*项目属性 order，flex， align-self*/
+		.box{
+			width: 60px;
+			height: 50px;
+			background: darkcyan;
+			text-align: center;
+			line-height: 50px;
+			flex: 0 0 auto;
+			margin-right: 5px;
+			
+		}
+		.box:nth-child(4n+4){
+			margin-right: 0;
+		}
+		
+		/*flex-grow: 默认0，用于确定项目在有剩余空间时是否放大，默认不放大；注意，即使设置了固定宽度也会放大。假设默认三个项目中前两个项目都是0，最后一个是1，最后的项目会占满剩余所有空间。假设只有第一个项目默认是0，后面两个项目均为1，那么后两个项目会均分剩余空间。flex：1；*/
+		
+		/*flex-shrink: 默认1，用于决定项目在空间不足式是否缩小，默认项目都是1，即项目一起等比例缩小；注意：即便设置了固定宽度，也会缩小。但如果某个项目设置为0，则即便空间不足自身也不会缩小。*/
+		
+		/*flex-basis：取值，默认auto，用于设置项目宽度，默认auto时，项目会保持默认宽度，或者以width为自身的宽度，但如果设置了flex-basis，权重会width属性高，因此会覆盖width属性。*/
+		
+		/*三个属性可简写为flex。取值：默认 0 1 auto， 用于定义项目放大，缩小与宽度。 该属性有两个快捷键值，是auto（1 1 auto）等分放大缩小，，与none(0 0 auto)不放大，但等分缩小。*/
+		</style>
+		
+	</head>
+	<body>
+		<div class="outer">
+			<div class="box">A</div>
+			<div class="box">B</div>
+			<div class="box">C</div>
+			<div class="box">D</div>
+			<div class="box">E</div>
+			<div class="box">F</div>
+			<div class="box">G</div>
+			<div class="box">H</div>
+			<div class="box">F</div>
+			<div class="box">G</div>
+			<div class="box">H</div>
+		</div>
+	</body>
+</html>

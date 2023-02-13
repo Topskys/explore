@@ -1,0 +1,329 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+		<!-- 引入百度地图api -->
+		<script type="text/javascript"
+			src="//api.map.baidu.com/api?type=webgl&v=1.0&ak=7Cc5Kmn672miPzG4qQhvlOrERcXMMinq"></script>
+		<!-- 引入jQuery -->
+		<!-- 如果jQuery无法访问，建议采用国内如百度、又拍云、新浪等国内CDN地址 -->
+		<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+		<!-- 引入字体图标 -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+			integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw=="
+			crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<title>Map</title>
+		<style>
+			body,
+			html {
+				overflow: hidden;
+				width: 100%;
+				height: 100%;
+				/* 消除内外边距 */
+				margin: 0;
+				padding: 0;
+				/* 标准盒子模型 */
+				box-sizing: border-box;
+				font-family: "微软雅黑";
+				/* 不选中字符 */
+				user-select: none;
+				-ms-user-select: none;
+				-moz-user-select: none;
+				-webkit-user-select: none;
+			}
+
+			.main {
+				display: flex;
+			}
+
+			header {
+				z-index: 999;
+				box-shadow: 0 2px 6px 0 whitesmoke;
+			}
+
+			header h1 {
+				margin: 0;
+				height: 80px;
+				line-height: 80px;
+			}
+
+			.info {
+				z-index: 100;
+				overflow: hidden;
+				height: calc(100vh - 80px);
+				min-width: 200px;
+				max-width: 250px;
+				padding: .75rem 1.25rem;
+				box-shadow: 0 2px 6px 0 #aaa;
+				overflow: auto;
+			}
+
+			#container {
+				flex: 1;
+				height: calc(100vh - 80px);
+			}
+
+			.path {
+				margin-top: 1.25rem;
+			}
+
+			button {
+				width: 100%;
+				height: 25px;
+				color: #fff;
+				margin: 10px 0;
+				text-align: center;
+				letter-spacing: 5px;
+				cursor: pointer;
+				padding: 4px 10px;
+				border: cornflowerblue;
+				border-radius: 10px;
+				background-color: royalblue;
+			}
+
+			button:hover {
+				background-color: darkblue;
+			}
+
+			input {
+				width: 15.625rem;
+				height: 25px;
+				margin: 10px 0;
+				padding: 0 5px;
+				/* 去掉选中引起的加粗边框 */
+				outline: none;
+			}
+
+			.fa {
+				color: #aaa;
+				padding: 0 20px;
+			}
+
+			.select-item ul {
+				padding: 0;
+			}
+
+			.select-item>ul>li {
+				padding: 10px;
+				border-top: 1px solid #ccc;
+				list-style: none;
+				font-size: 14px;
+			}
+
+			.select-item>ul>li:hover {
+				background-color: whitesmoke;
+			}
+
+			.select-item>ul>li:nth-child(1) {
+				border-top: 0;
+				font-size: 14px;
+			}
+
+			.select-item>ul>li:last-child {
+				border-bottom: 1px solid #ccc;
+				font-size: 14px;
+			}
+
+
+
+			/*滚动条样式*/
+			.innerbox::-webkit-scrollbar {
+				width: 4px;
+				height: 4px;
+			}
+
+			.innerbox::-webkit-scrollbar-thumb {
+				/* border-radius: 10px; */
+				-webkit-box-shadow: inset 0 0 5px whitesmoke;
+				background: whitesmoke;
+			}
+
+			.innerbox::-webkit-scrollbar-track {
+				-webkit-box-shadow: inset 0 0 5px #ccc;
+				border-radius: 2px;
+				background: #ccc;
+
+			}
+		</style>
+	</head>
+	<body>
+		<div class="Map">
+			<header style="text-align: center;">
+				<h1>周边查询</h1>
+			</header>
+			<div class="main">
+
+				<div class="info">
+
+					<div class="query">
+						<p>检索</p>
+						<div class="city"> <input id="keyword" type="text" placeholder="成市、机构、景点、周边" /></div>
+						<button onclick="theLocation()">搜索</button>
+					</div>
+
+					<div class="select-item">
+						<p>周边</p>
+						<ul>
+							<li onclick="theLocation('公交')"><i class="fa fa-bus"></i>交通设施</li>
+							<li onclick="theLocation('医院')"><i class="fa fa-hospital-o"></i>医疗机构</li>
+							<li onclick="theLocation('超市')"><i class="fa fa-shopping-cart"></i>商场超市</li>
+							<li onclick="theLocation('学校')"><i class="fa fa-graduation-cap"></i>教育机构</li>
+							<li onclick="theLocation('餐厅')"><i class="fa fa-cutlery"></i>餐饮休闲</li>
+							<li onclick="theLocation('公园')"><i class="fa fa-paper-plane"></i>公园景点</li>
+						</ul>
+					</div>
+
+					<div class="path">
+						<p>路线</p>
+						<div class="left">
+							<div><input class='start' type="text" placeholder="起点" /></div>
+							<div><input class='end' type="text" placeholder="终点" /></div>
+						</div>
+						<button onclick="find()">查询</button>
+					</div>
+					<p style="color: #888;font-size: 15px;margin-top: 1.25rem;">注：单击地图任意位置即可查看从您的位置到该地驾车的路径、路程长度、需要时间
+					</p>
+				</div>
+				<div id="container"></div>
+			</div>
+		</div>
+
+
+		<script>
+			// 百度地图API实例化
+			var map = new BMapGL.Map("container");
+			// 开启鼠标滚轮缩放
+			map.enableScrollWheelZoom();
+
+			// 添加地图组件
+			// 比例
+			map.addControl(new BMapGL.ScaleControl({
+				anchor: BMAP_ANCHOR_BOTTOM_RIGHT,
+				// offset: new BMapGL.Size(50, 50)
+			}));
+
+			// 创建城市选择控件
+			map.addControl(new BMapGL.CityListControl({
+				// 控件的停靠位置（可选，默认左上角）
+				anchor: BMAP_ANCHOR_TOP_RIGHT,
+				// 控件基于停靠位置的偏移量（可选）(x,y)
+				offset: new BMapGL.Size(10, 5)
+			}));
+
+			// 地图类型
+			map.addControl(new BMapGL.MapTypeControl({
+				anchor: BMAP_ANCHOR_TOP_RIGHT,
+				offset: new BMapGL.Size(15, 120)
+			}));
+
+
+
+			// 业务功能
+			// 定位当前位置，设置中心点坐标和地图级别
+			var t = this;
+			var p1 = 0.0
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(
+					//locationSuccess 获取成功的话
+					function(position) {
+						t.lng = position.coords.longitude;
+						t.lat = position.coords.latitude;
+						// 以福州为中心 119.28, 26.08
+						// 初始化地图,设置中心点坐标和地图级别
+						map.centerAndZoom(new BMapGL.Point(t.lng, t.lat), 11);
+						p1 = new BMapGL.Point(t.lng, t.lat);
+					},
+					//locationError  获取失败的话
+					function(error) {
+						var errorType = ['您拒绝共享位置信息', '获取不到位置信息', '获取位置信息超时'];
+						alert(errorType[error.code - 1]);
+					}
+				);
+			}
+
+
+
+			// 键盘监听回车事件绑定
+			document.onkeydown = (e) => {
+				if (window.event) {
+					e = window.event;
+				}
+				let int_keycode = e.charCode || e.keyCode;
+				if (int_keycode == '13') { //回车键：13
+					//处理按回车键后的逻辑
+					theLocation()
+				}
+			}
+
+
+			// 关键字检索
+			function theLocation(str) {
+
+				// 获取输入的关键字
+				let key = document.getElementById("keyword")
+				var keyword = key.value || str
+				// 判空
+				// if (!keyword) {
+				// 	// console.warn('keyword is null')
+				// 	// console.error('keyword is null')
+				// 	alert("关键字不能为空")
+				// 	return
+				// }
+				// 检索
+				var local = new BMapGL.LocalSearch(map, {
+					renderOptions: {
+						map: map
+					}
+				});
+				local.search(keyword);
+				key.value = ''
+			}
+
+
+			// 路线规划
+			function find() {
+
+				// 获取输入的起点和终点值
+				let start = $('.start').val()
+				let end = $('.end').val()
+				var walking = new BMapGL.WalkingRoute(map, {
+					renderOptions: {
+						map: map,
+						autoViewport: true
+					}
+				});
+				walking.search(start, end);
+			}
+
+
+			var p2 = 0.0
+			map.addEventListener('click', function(e) {
+				p2 = new BMapGL.Point(e.latlng.lng, e.latlng.lat);
+				transit.search(p1, p2);
+			});
+
+			var output = "从您的位置到该地驾车需要";
+			var searchComplete = function(results) {
+				if (transit.getStatus() != BMAP_STATUS_SUCCESS) {
+					return;
+				}
+				var plan = results.getPlan(0);
+				output += plan.getDuration(true) + "\n"; //获取时间
+				output += "总路程为：";
+				output += plan.getDistance(true) + "\n"; //获取距离
+			}
+			var transit = new BMapGL.DrivingRoute(map, {
+				renderOptions: {
+					map: map
+				},
+				onSearchComplete: searchComplete,
+				onPolylinesSet: function() {
+					setTimeout(function() {
+						alert(output)
+						output = "从您的位置到该地驾车需要"
+					}, "1000");
+				}
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>charge</title>
+		<!-- <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.11.2/css/all.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> -->
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			body {
+				/* 高度100% */
+				height: 100vh;
+				background-color: #000;
+			}
+
+			.charge {
+				width: 500px;
+				height: 100%;
+				/* border: 1px solid white; */
+				margin: 0 auto;
+				position: relative;
+			}
+
+			.number {
+				display: block;
+				color: #fff;
+				position: absolute;
+				z-index: 1;
+				width: 200px;
+				height: 200px;
+				line-height: 200px;
+				text-align: center;
+				font-size: 30px;
+				top: 25%;
+				left: 50%;
+				margin-left: -100px;
+			}
+
+			.contrast {
+				width: 100%;
+				height: 100%;
+				background-color: #000;
+				position: relative;
+				/* border: 1px solid red; 解注会使边框发生颜色交替，会运用hueRotate */
+				/* 设置对比度 */
+				filter: contrast(15);
+				animation: hueRotate 5s linear infinite;
+			}
+
+			/* 变色动画 */
+			@keyframes hueRotate {
+				0% {
+					/* hue-rotate是颜色滤镜，通过设置度数改变颜色 */
+					filter: contrast(15) hue-rotate(0);
+				}
+
+				100% {
+					filter: contrast(15) hue-rotate(360deg);
+				}
+			}
+
+			.circle {
+				width: 300px;
+				height: 300px;
+				position: absolute;
+				/* background-color: chartreuse; */
+				top: 20%;
+				left: 50%;
+				margin-left: -150px;
+				/* 设置模糊度，配合上面的contrast可产生粘黏效果 */
+				filter: blur(8px);
+				animation: circleRotate 5s linear infinite;
+				*/
+			}
+
+			/* 外圆 */
+			.circle::before {
+				content: "";
+				width: 200px;
+				height: 200px;
+				background-color: cyan;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				border-radius: 42% 38% 63% 49% / 45%;
+			}
+
+			/* 中心园 */
+			.circle::after {
+				content: "";
+				width: 178px;
+				height: 178px;
+				background-color: #000;
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%, -50%);
+				border-radius: 50%;
+			}
+
+			@keyframes circleRotate {
+				0% {
+					transform: rotate(0);
+				}
+
+				100% {
+					transform: rotate(360deg);
+				}
+			}
+
+			/* 冒泡底座 */
+			.bubble-home {
+				width: 100px;
+				height: 40px;
+				background-color: cyan;
+				position: absolute;
+				left: 50%;
+				bottom: 0;
+				margin-left: -50px;
+				border-radius: 100px 100px 0 0;
+				filter: blur(8px);
+			}
+
+			.bubble {
+				width: 20px;
+				height: 20px;
+				background-color: cyan;
+				border-radius: 100%;
+				position: absolute;
+				left: 50%;
+				bottom: 0;
+				transform: translateX(-50%);
+				z-index: 2;
+				filter: blur(5px);
+				animation: bubbleUp 5s ease-in-out infinite;
+			}
+
+			/* 冒泡动画 */
+			@keyframes bubbleUp {
+				0% {
+					bottom: 0;
+				}
+
+				100% {
+					/* calc(a - b)注意减号附加要隔开，不然不生效 */
+					bottom: calc(80% - 260px);
+				}
+			}
+
+			.bubble:nth-child(1) {
+				width: 20px;
+				height: 20px;
+				left: 50%;
+				animation-duration: 5s;
+				animation-delay: 1s;
+			}
+
+			.bubble:nth-child(2) {
+				width: 22px;
+				height: 22px;
+				left: 49%;
+				animation-duration: 4s;
+				animation-delay: 2s;
+			}
+
+			.bubble:nth-child(3) {
+				width: 24px;
+				height: 24px;
+				left: 47%;
+				animation-duration: 3s;
+				animation-delay: 3s;
+			}
+
+			.bubble:nth-child(4) {
+				width: 18px;
+				height: 18px;
+				left: 53%;
+				animation-duration: 3s;
+				animation-delay: 4s;
+			}
+
+			.bubble:nth-child(5) {
+				width: 26px;
+				height: 26px;
+				left: 51%;
+				animation-duration: 4s;
+				animation-delay: 5s;
+			}
+			
+			button{
+				position: absolute;
+				bottom: 3.125rem;
+				right: 3.125rem;
+				border-radius: 0.1875rem;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="charge" >
+			<div class="number"></div>
+			<div class="contrast">
+				<div class="bubble"></div>
+				<div class="bubble"></div>
+				<div class="bubble"></div>
+				<div class="bubble"></div>
+				<div class="bubble"></div>
+				<div class="bubble-home"></div>
+				<div class="circle"></div>
+			</div>
+		</div>
+		
+		<!-- <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+		<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script> -->
+		
+		<script type="text/javascript">
+			// window.onload = function() {}
+			
+			var a = 0, number = document.getElementsByTagName("div")[1];
+		
+			window.setInterval(() => {
+				if (a.toFixed(2) === "100.00") {
+					return
+				} else {
+					a = (a + 0.01);
+					number.innerHTML = a.toFixed(2) + " %\n";
+				}
+			}, 1000); 
+			
+			//保留两位小数，不四舍五入，而toFixed()要四舍五入
+			// a=Math.floor((a+0.01) * 100) / 100;
+			// a=Number((a+0.01).toString().match(/^\d+(?:\.\d{0,2})?/))
+			//重复执行某个方法
+			// var t1 = window.setInterval(hello,1000);
+			// var t2 = window.setInterval("hello()",3000);
+			// //去掉定时器的方法
+			// window.clearInterval(t1);
+		</script>
+		
+		
+		
+		<!-- 准备一个按钮 -->
+		<button class="fullscreen" onclick="fullScreen()">全屏</button>
+		
+		<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+		<script>
+			//定义一个变量进行判断，默认false 非全屏状态
+			let exitFullscreen = false
+			// var button1=document.getElementsByClassName(".fullscreen");
+			// var button1 = document.querySelector("button"); //获取第一个button
+			var button1 = document.getElementsByTagName("button")[0];//获取第一个button
+			function exitFSTxt() {
+				button1.innerHTML = "退出";
+			}
+		
+			function enterFSTxt() {
+				button1.innerHTML = "全屏";
+			}
+			// 全屏事件
+			function fullScreen() {
+				let element = document.documentElement;
+		
+				if (this.fullscreen) {
+					if (document.exitFullscreen) {
+						document.exitFullscreen();
+						this.fullscreen = !this.fullscreen;
+						enterFSTxt();
+		
+					} else if (document.webkitCancelFullScreen) {
+						document.webkitCancelFullScreen();
+						this.fullscreen = !this.fullscreen;
+						enterFSTxt();
+					} else if (document.mozCancelFullScreen) {
+						document.mozCancelFullScreen();
+						this.fullscreen = !this.fullscreen;
+						enterFSTxt();
+					} else if (document.msExitFullscreen) {
+						document.msExitFullscreen();
+						this.fullscreen = !this.fullscreen;
+						enterFSTxt();
+					}
+				} else {
+					if (element.requestFullscreen) {
+						element.requestFullscreen();
+						this.fullscreen = !this.fullscreen;
+						exitFSTxt();
+					} else if (element.webkitRequestFullScreen) {
+						element.webkitRequestFullScreen();
+						this.fullscreen = !this.fullscreen;
+						exitFSTxt();
+					} else if (element.mozRequestFullScreen) {
+		
+						element.mozRequestFullScreen();
+						this.fullscreen = !this.fullscreen;
+						exitFSTxt();
+					} else if (element.msRequestFullscreen) {
+						// IE11
+						element.msRequestFullscreen();
+						this.fullscreen = !this.fullscreen;
+						exitFSTxt();
+					}
+				}
+			}
+		</script>
+	</body>
+</html>

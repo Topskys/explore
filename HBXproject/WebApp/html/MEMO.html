@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>MEMO</title>
+		<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.11.2/css/all.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+				font-family: "montserrat", sans-serif;
+				box-sizing: border-box;
+			}
+
+			:root {
+				--body-bgcolor: linear-gradient(120deg, #487eb0, #fbc531);
+				--com-task-bgcolor: rgba(0, 0, 0, 0.5);
+				--com-task-font-color: white;
+				--task-bgcolor: rgba(255, 255, 255, 0.5);
+				--font-size: 18px;
+				--padding-size: 18px;
+				--icon-size: 16px;
+				--border-radius: 5px;
+				--border-size: 2px;
+				--margin-left: 20px;
+			}
+
+			body {
+				background-image: var(--body-bgcolor);
+				height: 100vh;
+			}
+
+			.memo {
+				max-width: 800px;
+				margin: 0 auto;
+				padding: 10px;
+				/* //10px内边距上下左右 */
+			}
+
+			.memo>span {
+				font-family: "montserrat", sans-serif;
+				color: black;
+				display: flex;
+				justify-content: center;
+				/* align-items: center; */
+				font-size: var(--font-size);
+				/* 18px */
+				padding: var(--padding-size) 0;
+			}
+
+			.txtbox {
+				width: 100%;
+				border: none;
+				border-bottom: var(--border-size) solid black;
+				background: none;
+				padding: 10px;
+				/* //10px内边距 */
+				outline: none;
+				font-size: var(--font-size);
+				/* //18px */
+			}
+
+			h3 {
+				margin: 10px 0;
+				/* 外边距topbottom 10px */
+				font-size: var(--font-size);
+			}
+
+			.task {
+				width: 100%;
+				background: var(--task-bgcolor);
+				padding: var(--padding-size);
+				margin: 6px 0;
+				overflow: hidden;
+				border-radius: var(--border-radius);
+				font-size: var(--font-size);
+			}
+
+			.task>i {
+				float: right;
+				margin-left: var(--margin-left);
+				cursor: pointer;
+				font-size: var(--icon-size);
+				
+			}
+
+			.comp>.task {
+				background: var(--com-task-bgcolor);
+				color: var(--com-task-font-color);
+			}
+
+
+			/* For mini devices */
+			/* @media screen and (max-width: 400px) {
+				:root {
+					--font-size: 3.125rem;
+					--icon-size: 3.125rem;
+					--padding-size: 3.125rem;
+					--border-radius: 3.125rem;
+					--border-size: 0.3125rem;
+					--margin-left: 3.125rem;
+				}
+
+			} */
+		</style>
+	</head>
+	<body>
+
+		<div class="memo">
+			<span>MEMO</span>
+
+			<input type="text" class="txtbox" placeholder="Add a task">
+
+			<div class="notcomp">
+				<h3>Not Completed</h3>
+
+			</div>
+
+			<div class="comp">
+				<h3>Completed</h3>
+
+			</div>
+
+		</div>
+
+		<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+		<script>
+			$(".txtbox").on("keyup", function(e) {
+				if ($(".txtbox").val() && e.keyCode === 13) {
+					var task = $(`<div class="task"></div>`).text($(".txtbox").val());
+					var del = $(`<i class="fas fa-trash-alt"></i>`).click(function() {
+						$(this).parent().fadeOut(function() {
+							$(this).remove();
+						});
+					});
+					var check = $(`<i class="fas fa-check"></i>`).click(function() {
+						$(this).parent().fadeOut(function() {
+							$(".comp").append($(this));
+							$(this).fadeIn();
+						});
+						$(this).remove();
+					});
+
+					//渲染
+					task.append(del, check)
+					$(".notcomp").append(task);
+
+					//clear the input
+					$(".txtbox").val("");
+				}
+			});
+		</script>
+	</body>
+</html>

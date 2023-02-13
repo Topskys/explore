@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<center>
+			
+			<img src="img/1.jpg" id="pic-auto" style="width: 80%; height: 400px;"/>
+			
+		</center>
+		<script>
+		var i=1;
+		setInterval(function(){	
+			i++;
+			if(i>2){
+				i=1;
+			}
+			document.getElementById("pic-auto").src="img/"+ i +".JPG;
+		},1000);
+		</script>
+	</body>
+</html>

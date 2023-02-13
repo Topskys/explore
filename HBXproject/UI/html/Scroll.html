@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>CSS Scroll Snap</title>
+		<style>
+		body{
+			margin: 0;
+			padding: 0;
+			
+		}
+		h1{
+			height: 80px;
+			position: sticky;
+			top: 0;
+			background-color: white;
+		}
+		/*核心样式*/
+		main{
+			
+			/*display: flex; */
+			
+			-ms-scroll-snap-type:  y   proximity;/*y纵向贴合，mandatory强制滚动,proximity*/
+			/*需要把滚动条设置到直接父容器，
+			scroll-snap-type 才能生效，
+			默认是在body上，现在是 main上*/
+			overflow: scroll;/*设置滚动条*/
+			height: 100vh;
+			
+			
+			/*width: 100vw;*/
+			
+			scroll-padding:80px;
+		}
+		section{
+			width: 100vw;/*沾满全屏  */
+			height: 100vh;
+			-ms-scroll-snap-type:start;/*滚动内容设置，对齐方式，下一篇的内容会贴合到顶部。start、end、center*/
+			
+			/*flex-shrink: 0;*/
+			
+			/*文本水平垂直居中*/
+			text-align: center;
+			line-height: 100vh;
+			
+		}
+		
+		section:nth-child(3){
+			height: 250vh;
+			
+		}
+		</style>
+	</head>
+	<body>
+		<center>
+			<main>
+				<h1>title</h1>
+			<section style="background-color: #7FFFD4;">page1</section>
+			<section style="background-color: royalblue;">page2</section>
+			<section style="background-color: lightcoral;">page3</section>
+			<section style="background-color: lightseagreen;">page4</section>
+			<section style="background-color: darkmagenta;">page5</section>
+			<section style="background-color: red;">page6</section>
+			<section style="background-color: fuchsia;">page7</section>
+			<section style="background-color: orange;">page8</section>
+			<section style="background-color: gold;">page9</section>
+			<section style="background-color: lightgoldenrodyellow;">page10</section>
+		</main>
+		</center>
+		
+	</body>
+</html>

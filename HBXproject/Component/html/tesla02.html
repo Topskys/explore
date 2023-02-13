@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			h1{
+				width: 100%;
+				height: 80px;
+				position: sticky;
+				top: 0;
+				line-height: 80px;
+				background-color: #fff;
+			}
+			main{
+				
+				scroll-snap-type: y mandatory;/* 方向 强制滚动 */
+				/* 需要把滚动条设置到直接父容器，
+				scroll-snap-type才能生效，
+				默认是在body上，现在在main上 */
+				overflow: scroll;
+				height: 100vh;
+				
+				/* display: flex;
+				scroll-snap-type: x mandatory; */
+				
+				scroll-padding: 80px;
+			}
+			section{
+				/* width: 100vw; */
+				height: 100vh;
+				scroll-snap-align: start;
+				/* flex-shrink: 0; */
+				text-align: center;
+				line-height: 100vh;
+			}
+			/* section:nth-child(3){
+				height: 250vh;
+				/* 假设第三个非常长 */
+			/*} */
+		</style>
+	</head>
+	<body>
+		<main>
+			<h1 align='center'>SECTION</h1>
+			<section style="background-color: aquamarine;">section 1</section>
+			<section style="background-color: cornflowerblue;">section 2</section>
+			<section style="background-color: lightcoral;">section 3</section>
+			<section style="background-color: powderblue;">section 4</section>
+			<section style="background-color:thistle;">section 5</section>
+		</main>
+	</body>
+</html>

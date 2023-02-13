@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+		    html{
+		        font-size:10vw;
+		    }
+		    ul{
+		        display:none;
+		        list-style:none;
+				
+		    }
+			ul>li{
+				font-size: 1rem;
+			}
+		    input{
+		        display:none;
+		    }
+		    input:checked +ul{
+		        display:block;
+		    }
+		    @media(min-width:500px){
+		        span{
+		            display:none;
+		        }
+		        ul{
+		            display:block;
+		        }
+		    }
+		</style>
+		
+	</head>
+	<body>
+		
+		<label for="menu"><span>菜单</span></label>
+		<input id="menu" type="checkbox"/>
+		<ul>
+		    <li>首页</li>
+		    <li>中心</li>
+		    <li>关于</li>
+		</ul>
+	</body>
+</html>
