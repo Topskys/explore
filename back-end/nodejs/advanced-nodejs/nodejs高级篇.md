@@ -557,7 +557,7 @@ TCP的握手和挥手本质上都是四次，只是断开连接时，需要保�
 
 实例：12-network client.js server.js data-package.js
 
-<center> <img src="	https://img-blog.csdnimg.cn/092e9d5d0d494a59a1a944d821c50249.png" style="max-width: 600px;" alt=’数据包‘></center>
+<center> <img src="https://img-blog.csdnimg.cn/092e9d5d0d494a59a1a944d821c50249.png" style="max-width: 600px;" alt=’数据包‘></center>
 
 1. 数据传输过程
 
