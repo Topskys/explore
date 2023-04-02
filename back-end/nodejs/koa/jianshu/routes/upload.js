@@ -46,6 +46,7 @@ let upload = Multer({ storage })
 
 // 上传图片接口
 router.post('/img', upload.single('file'), async ctx => { // form-data》》myfile(key)  SelectFiles
+console.log("Hi Video")
 
     let url = ctx.req.file.path
 
