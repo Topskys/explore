@@ -1,0 +1,3 @@
+resolveCSS()
+    resolveJS()
+    resolveHTML()

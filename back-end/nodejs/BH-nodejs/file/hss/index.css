@@ -1,0 +1,16 @@
+.box {
+    width: 80%;
+    height: 100vh;
+    background: red;
+}
+
+.box .comm {
+    width: 80%;
+    height: 100%;
+    margin: 0 auto;
+    background: greenyellow;
+}
+
+.active {
+    background-color: blueviolet;
+}

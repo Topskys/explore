@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>跨域/首页</title>
+    <script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <button id="btnGET">GET</button>
+    <button id="btnPOST">POST</button>
+    <button id="btnDEL">DEL</button>
+    <button id="btnJSONP">JSONP</button>
+    <button id="btnLogout">退出登录</button>
+
+    <script>
+        $(function() {
+            //测试GET接口
+            $('#btnGET').on('click', () => {
+                $.ajax({
+                    method: 'GET',
+                    url: 'http://127.0.0.1:8888/api/get',
+                    data: {
+                        name: 'get',
+                        age: 18,
+                    },
+                    success: (res) => {
+                        console.log(res)
+                    },
+                })
+            })
+
+            //测试POST接口
+            $('#btnPOST').on('click', () => {
+                $.ajax({
+                    method: 'POST',
+                    url: 'http://127.0.0.1:8888/api/post',
+                    data: {
+                        name: 'post',
+                        age: 20,
+                    },
+                    success: (res) => {
+                        console.log(res)
+                    },
+                })
+            })
+
+            //未删除按钮绑定点击事件处理函数//演示简单请求和预检请求的区别
+            $('#btnDEL').on('click', () => {
+                $.ajax({
+                    type: 'DELETE',
+                    url: 'http://127.0.0.1:8888/api/delete',
+                    success: (res) => {
+                        console.log(res)
+                    },
+                })
+            })
+
+
+            //测试JSONP接口
+            $('#btnJSONP').on('click', () => {
+                $.ajax({
+                    method: 'GET',
+                    url: 'http://127.0.0.1:8888/api/jsonp',
+                    dataType: 'jsonp',
+                    success: (res) => {
+                        console.log(res)
+                    },
+                })
+            })
+
+
+            //退出登录
+            $('#btnLogout').on('click', () => {
+                $.ajax({
+                    method: 'GET',
+                    url: 'http://127.0.0.1:8888/api/logout',
+                    success: (res) => {
+                        console.log(res)
+                    },
+                })
+            })
+
+
+        })
+    </script>
+</body>
+
+</html>
+
+</html>

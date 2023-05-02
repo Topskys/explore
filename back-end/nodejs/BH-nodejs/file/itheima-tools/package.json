@@ -1,0 +1,12 @@
+{
+    "name": "itheima-tools",
+    "version": "1.0.0",
+    "description": "提供了时间格式化、HTMLEscape相关的功能,  初始化运行npm init -y",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": ["itheima", "datFormat", "escape"],
+    "author": "",
+    "license": "ISC"
+}

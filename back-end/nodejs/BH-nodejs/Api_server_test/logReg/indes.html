@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script>
+
+    <title>Document</title>
+    <style>
+        .logReg {
+            width: 400px;
+            margin: 0 auto;
+            border: 1px solid #aaa;
+        }
+        
+        .username,
+        .password {
+            width: 50%;
+            margin: 30px auto;
+        }
+        
+        input {
+            width: 100%;
+            padding: 5px 10px;
+            outline: none;
+        }
+        
+        .btn {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 50%;
+            margin: 50px auto;
+        }
+        
+        button {
+            display: block;
+            color: #fff;
+            padding: 5px 10px;
+            background-color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="logReg" action="" method="post">
+        <h1 align="center">登录注册</h1>
+        <div class="username"><input type="text" placeholder="username"></div>
+        <div class="password"><input type="password" placeholder="password"></div>
+        <div class="btn"><button type="submit" class="btnLog">登录</button><button type="submit" class="btnReg">注册</button></div>
+    </div>
+    <script>
+        $(() => {
+            $(".btnLog").on('click', () => {
+                $.ajax({
+                    method: 'POST',
+                    url: 'http://127.0.0.1:8888/user/login',
+                    data: {
+                        username: $(".username").value,
+                        password: $(".password").value,
+                    },
+                    success: (res) => {
+                        console.log(res)
+                    },
+                })
+                console.log($(".username>input").value)
+            })
+            $(".btnReg").on('click', () => {
+                $.ajax({
+                    method: 'POST',
+                    url: 'http://127.0.0.1:8888/user/reguser',
+                    data: {
+                        username: $(".form").username,
+                        password: $(".form").password,
+                    },
+                    success: (res) => {
+                        console.log(res)
+                    },
+                })
+            })
+        })
+    </script>
+</body>
+
+</html>
