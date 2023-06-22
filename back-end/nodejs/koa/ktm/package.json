@@ -1,0 +1,50 @@
+{
+  "name": "koa-api",
+  "version": "1.0.0",
+  "description": "koa-api",
+  "main": "index.ts",
+  "scripts": {
+    "start": "nodemon",
+    "test": "jest"
+  },
+  "jest": {
+    "preset": "ts-jest"
+  },
+  "keywords": [
+    "koa",
+    "ts",
+    "mysql"
+  ],
+  "author": "Topsky",
+  "license": "MIT",
+  "dependencies": {
+    "@types/jsonwebtoken": "^9.0.2",
+    "@types/koa": "^2.13.6",
+    "@types/koa-router": "^7.4.4",
+    "async-validator": "^4.2.5",
+    "jsonwebtoken": "^9.0.0",
+    "koa": "^2.14.2",
+    "koa-body": "^6.0.1",
+    "koa-router": "^12.0.0",
+    "koa-static": "^5.0.0",
+    "mysql2": "^3.4.0",
+    "reflect-metadata": "^0.1.13",
+    "sequelize": "^6.32.1",
+    "sequelize-typescript": "^2.1.5"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^8.2.0",
+    "@types/jest": "^29.5.2",
+    "@types/koa-static": "^4.0.2",
+    "@types/log4js": "^2.3.5",
+    "@types/mocha": "^10.0.1",
+    "@types/supertest": "^2.0.12",
+    "dotenv": "^16.3.1",
+    "jest": "^29.5.0",
+    "log4js": "^6.9.1",
+    "supertest": "^6.3.3",
+    "ts-jest": "^29.1.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.3"
+  }
+}

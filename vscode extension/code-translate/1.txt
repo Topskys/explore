@@ -1,0 +1,33 @@
+卷 Data 的文件夹 PATH 列表
+卷序列号为 8A12-85C2
+D:.
+ 
+├─.vscode
+│      extensions.json
+│      launch.json
+│      settings.json
+│      tasks.json
+│      
+├─dist
+│      extension.js
+│      extension.js.map
+│      
+└─src
+|   │  extension.ts
+|   │  
+|   └─test
+|       │  runTest.ts
+|       │  
+|       └─suite
+|               extension.test.ts
+|               index.ts
+│  .eslintrc.json
+│  .vscodeignore
+│  CHANGELOG.md
+│  package-lock.json
+│  package.json
+│  README.md
+│  tsconfig.json
+│  vsc-extension-quickstart.md
+│  webpack.config.js
+

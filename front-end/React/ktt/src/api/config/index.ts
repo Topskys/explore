@@ -1,0 +1,1 @@
+export const groupBuyState = ["待开始", "预告中", "进行中", "已结束", "提前结束"]

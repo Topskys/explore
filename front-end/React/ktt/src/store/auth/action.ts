@@ -80,15 +80,18 @@ function formatRoutes(arr: Array<OriginMenuItemType>): Array<RouteItemType> {
     let list: Array<RouteItemType> = [];
     arr.forEach(item => {
         if (item.component) {
+            const url: string = item.path.replace(/^\/admin\//, '')
+            const component: string = item.component?.replace(/View/, "")  // 删除View
             const obj: RouteItemType = {
-                path: item.path,
-                element: LazyLoad(item.component.slice(0, -9)) // arr.slice() 移除View.vue，splice()会影响原数组
+                path: url.replace(/^\//,''), // dash
+                element: LazyLoad(component.slice(0, -4)) // arr.slice() 移除.vue，splice()会影响原数组
             }
             list.push(obj);
-        }
-        if (item.children) {
-            const res = formatRoutes(item.children);
-            list = list.concat(res);
+        } else {
+            if (item.children) {
+                const res = formatRoutes(item.children);
+                list = list.concat(res);
+            }
         }
     })
     return list;

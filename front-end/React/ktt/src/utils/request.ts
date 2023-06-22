@@ -1,8 +1,9 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { config } from 'process';
 import NProgress from 'nprogress'; // npm i --save-dev @types/nprogress
+import 'nprogress/nprogress.css';
 import { message } from "antd";
 
+// 不显示提示转圈
 NProgress.settings.showSpinner = false
 
 const request = axios.create({
@@ -11,6 +12,7 @@ const request = axios.create({
 })
 
 request.interceptors.request.use(config => {
+    NProgress.start();
     let token = sessionStorage.getItem('token');
     token && (config.headers["Authorization"] = "Bearer " + token);
     return config
@@ -31,7 +33,8 @@ request.interceptors.response.use(result => {
     }
     return result
 }, error => {
-    NProgress.done()
+    NProgress.done();
+    message.info("请求错误")
     return error
 })
 

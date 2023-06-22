@@ -1,6 +1,6 @@
 import Login from "../views/Login";
 import Admin from "../views/admin/Admin";
-import Permission from "../utils/permission";
+import Permission from "../utils/Permission";
 import LazyLoad from "../utils/LazyLoad";
 
 // 创建基础路由
@@ -9,7 +9,7 @@ const baseRoutes = [
     {
         path: "/admin/*", element: <Permission><Admin /></Permission>,
         children: [
-            { path: "", element: LazyLoad("/admin/dash") }
+            { path: "", element: LazyLoad("/admin/Dash") },
         ],
     },
 ]

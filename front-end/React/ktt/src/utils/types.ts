@@ -12,5 +12,19 @@ export interface LoginResType {
     code?: number,
     token?: string,
     msg?: string,
-    userInfo?: any,
+    user?: any,
+}
+
+
+export interface GroupBuyType {
+    id: "",
+    name: string,
+    startTime?: string,
+    endTime?: string,
+    state: string,
+    current?:number,
+    pageSize?: number,
+    order?:string,
+    products?:string,
+    shop?:string,
 }
