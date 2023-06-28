@@ -15,7 +15,7 @@ import TestService from "./src/service/TestService";
 import { MyService, MyServiceImpl } from "./src/service/services";
 import TestServiceImpl from "./src/service/impl/TestServiceImpl";
 import 'reflect-metadata';
-import { get } from 'inversify-inject-decorators';
+// import { get } from 'inversify-inject-decorators';
 
 db();
 

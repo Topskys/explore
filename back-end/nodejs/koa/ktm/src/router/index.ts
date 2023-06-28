@@ -4,8 +4,12 @@ import LoginController from "../controller/LoginController";
 import AuthMiddleware from "../middleware/AuthMiddleware";
 import AdminController from "../controller/AdminController";
 import UploadController from "../controller/UploadController";
+import TestController from "../controller/TestController";
+import { Types } from "../service/Types";
+import TestService from "../service/TestService";
 
-const router = new KoaRouter({prefix: '/admin'});
+
+const router = new KoaRouter({ prefix: '/admin' });
 
 // router.use(AuthMiddleware);
 

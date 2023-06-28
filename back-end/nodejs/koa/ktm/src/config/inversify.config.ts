@@ -1,18 +1,11 @@
-// import { Container } from 'inversify';
-// import TestService from '../service/TestService';
-// import TestServiceImpl from '../service/impl/TestServiceImpl';
-
-
-// const container = new Container();
-// container.bind<TestService>(TestServiceImpl).to(TestServiceImpl);
-
-// export default container;
-
-// inversify.config.ts
 import { Container } from 'inversify';
 import { MyService, MyServiceImpl } from '../service/services';
+import { Types } from '../service/Types';
+import { Targets } from '../service/Targets';
 
+
+// IOC容器
 const container = new Container();
-container.bind<MyService>("MyService").to(MyServiceImpl);
+container.bind<Types.Service>(Types.Service).to(Targets.Services.MyService);
 
 export default container;

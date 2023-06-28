@@ -5,7 +5,11 @@ import { injectable } from 'inversify';
 @injectable()
 export default class TestServiceImpl extends Test implements TestService {
 
-    async getTestByUsername(username: string): Promise<any> {
-        return await TestServiceImpl.findOne({ where: { username } });
+    // async getTestByUsername(username: string): Promise<any> {
+    //     return await TestServiceImpl.findOne({ where: { username } });
+    // }
+    MyService()  {
+        console.log('------MyService-----is --- ok---')
+        return Promise.resolve(["Hello","World"])
     }
 }
