@@ -8,13 +8,13 @@ import validate from "../utils/validate";
 
 class LoginController {
 
-    async index(ctx:Context) {
-        const rules:Rules={
-            username:[
+    async index(ctx: Context) {
+        const rules: Rules = {
+            username: [
                 {
                     type: "string",
                     required: true,
-                    message:"用户名不能为空"
+                    message: "用户名不能为空"
                 }
             ],
             password: [
@@ -25,24 +25,24 @@ class LoginController {
                 }
             ]
         }
-        interface IAdmin{
+        interface IAdmin {
             username: string,
             password: string
         }
-        const {data,error}=await validate<IAdmin>(ctx,rules);
-        if(error!==null){
-            return response.error(ctx,error)
+        const { data, error } = await validate<IAdmin>(ctx, rules);
+        if (error !== null) {
+            return response.error(ctx, error)
         }
         // const admin = await AdminService.getAdminById(1);
         const admin = await AdminService.getAdminByUsername(data.username);
-        if(admin ===null){
-            return response.error(ctx,"数据不存在");
+        if (admin === null) {
+            return response.error(ctx, "数据不存在");
         }
-        const token=sign(admin);
+        const token = sign(admin);
         // ctx.body = { 
         //     token,
         // }
-        response.success(ctx,{token});
+        response.success(ctx, { token });
     }
 }
 

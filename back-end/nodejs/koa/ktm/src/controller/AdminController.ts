@@ -103,14 +103,14 @@ class AdminController {
             return response.error(ctx, "更新失败")
         }
     }
-    async deleteAdmin(ctx: Context){
+    async deleteAdmin(ctx: Context) {
         const id = ctx.params["id"] as number;
         const admin = await AdminService.getAdminById(id);
         if (admin === null) {
             return response.error(ctx, "用户不存在");
         }
-        const row=await AdminService.deleteAdmin(id);
-        if(row>0){ // 受影响的行数
+        const row = await AdminService.deleteAdmin(id);
+        if (row > 0) { // 受影响的行数
             return response.success(ctx)
         }
         return response.error(ctx, "删除失败");

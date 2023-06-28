@@ -41,7 +41,7 @@ npm i sass --save
 ## 构建路由
 ```bash
 # router
-npm i react-router-dom --save-dev
+npm i react-router-dom@5 --save-dev
 ```
 
 
