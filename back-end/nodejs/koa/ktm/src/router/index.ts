@@ -15,6 +15,8 @@ const router = new KoaRouter({ prefix: '/admin' });
 
 router.post('/login', LoginController.index);
 
+router.post('/login', TestController.findOne);
+
 router.post('/upload', UploadController.upload);
 
 router.post('/', AdminController.createAdmin);

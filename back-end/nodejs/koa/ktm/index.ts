@@ -12,7 +12,6 @@ import KoaStatic from "koa-static";
 import path from "path";
 import container from './src/config/inversify.config';
 import TestService from "./src/service/TestService";
-import { MyService, MyServiceImpl } from "./src/service/services";
 import TestServiceImpl from "./src/service/impl/TestServiceImpl";
 import 'reflect-metadata';
 // import { get } from 'inversify-inject-decorators';
@@ -42,21 +41,21 @@ app
 
 
 // 使用装饰器获取从容器解析的服务实例
-class MyApp {
-    @get("MyService")
-    private myService!: MyService;
+// class MyApp {
+//     @get("MyService")
+//     private myService!: MyService;
 
-    public handleRequest() {
-        this.myService.doSomething();
-    }
-}
+//     public handleRequest() {
+//         this.myService.doSomething();
+//     }
+// }
 
 // 注册中间件函数并调用请求处理方法
-app.use(async (ctx, next) => {
-    const myApp = new MyApp();
-    myApp.handleRequest();
-    await next();
-});
+// app.use(async (ctx, next) => {
+//     const myApp = new MyApp();
+//     myApp.handleRequest();
+//     await next();
+// });
 app.use(router.routes());
 
 const run = (port: any): Server => app.listen(port, () =>console.log(`server is running at ${port}`));
