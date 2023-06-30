@@ -5,11 +5,12 @@ import { injectable, inject } from "inversify";
 import "reflect-metadata";
 
 import { Weapon, ThrowableWeapon, Warrior } from "../TestService";
-import { TYPES } from '../Types';
+import { TYPES } from '../types';
+import { provide } from 'inversify-binding-decorators';
 
 
 
-@injectable()
+// @injectable()
 class Katana implements Weapon {
     public hit() {
         return "cut!";
@@ -43,7 +44,8 @@ class Ninja implements Warrior {
 }
 
 
-@injectable()
+// @injectable()
+@provide(TestServiceImpl)
 class TestServiceImpl implements TestService {
     getHello(n: number):number {
         // @ts-ignore
