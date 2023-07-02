@@ -31,16 +31,16 @@ export default class TestController implements interfaces.Controller {
         testDTO.username = ctx.request.body.username;
         testDTO.password = ctx.request.body.password;
         // 数据验证
-        const errors = await validate(testDTO);
+        const resUtil = new ResponseUtil();
+        const errors = await validate(testDTO, { validationError: { target: false } });
         if (errors.length > 0) {
             // 验证失败，处理错误信息
-            ctx.status = 400;
-            ctx.body = { errors };
+            // ctx.status = 400;
+            // ctx.throw(400, errors[0])
+            resUtil.error(ctx, Object.values(errors[0].constraints || {})[0],400)
         }
         // 验证通过，继续后续操作
-        const resUtil = new ResponseUtil();
         const test = await this.ts.findTestByUsername(testDTO.username);
-        console.log("------3-------", test, createHash('sha256').update(testDTO.password).digest('hex'));
         if (test) {
             if (test.password === createHash('sha256').update(testDTO.password).digest('hex')) {
                 return resUtil.success(ctx, "登录成功", { token: "255637346" });

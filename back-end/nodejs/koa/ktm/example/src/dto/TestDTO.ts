@@ -3,14 +3,14 @@ import { IsNotEmpty, MinLength, MaxLength, IsNumber, Min, Max, IsEmail, IsPhoneN
 
 export default class TestDTO {
 
-    @IsNotEmpty({ message: "请输用户名" })
-    @MinLength(5, { message: "用户名长度不能少于5个字符" })
     @MaxLength(20, { message: "用户名长度不能超过20个字符" })
+    @MinLength(5, { message: "用户名长度不能少于5个字符" })
+    @IsNotEmpty({ message: "请输用户名" })
     username!: string;
 
-    @IsNotEmpty({ message: "请输用户名" })
-    @MinLength(6, { message: "密码长度不能少于6个字符" })
     @MaxLength(20, { message: "密码长度不能超过20个字符" })
+    @MinLength(6, { message: "密码长度不能少于6个字符" })
+    @IsNotEmpty({ message: "请输用户名" })
     password!: string;
 
     id: string | undefined;

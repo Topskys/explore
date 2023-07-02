@@ -19,6 +19,8 @@ export const config = {
         db_dialect: process.env.DB_DIALECT,
     },
     log: {
+        // 多久清除一次日志文件
+        clear_often: process.env.LOG_CLEAR_OFTEN,
         appenders: {
             cheese: {
                 type: "file",

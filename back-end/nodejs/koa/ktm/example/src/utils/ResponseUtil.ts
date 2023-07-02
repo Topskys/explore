@@ -27,7 +27,7 @@ export default class ResponseUtil {
      * @param data 响应数据
      * @param code 响应数字标识
      */
-    error(ctx: Context, msg: any = "error", data: any = [], code: number = 200) {
+    error(ctx: Context, msg: any = "error",  code: number = 400,data: any = []) {
         ctx.body = {
             code,
             msg,
@@ -40,7 +40,7 @@ export default class ResponseUtil {
      * @param ctx context 上下文
      * @param options 响应对象
      */
-    self(ctx: Context, options:any) {
+    custom(ctx: Context, options:any) {
         ctx.body = {
             code:200,
             msg:"success",

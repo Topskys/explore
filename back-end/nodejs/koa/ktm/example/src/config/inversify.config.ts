@@ -47,11 +47,11 @@ class Inversify extends Container {
     }
 }
 
-export default new Inversify();
+// export default new Inversify();
 
 // Test.initialize(sequelize)
 export const bind=(container:Container)=>{
-    container.bind<Sequelize>("Sequelize").toConstantValue(sequelize);
+    // container.bind<Sequelize>("Sequelize").toConstantValue(sequelize);
     // container.bind<typeof Test>("Test").toConstantValue(Test);
     // container.bind<TestDao>("TestDao").to(TestDao);
 }

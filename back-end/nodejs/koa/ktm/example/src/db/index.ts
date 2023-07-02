@@ -1,8 +1,8 @@
 import path from "path";
-import { Sequelize, SequelizeOptions } from 'sequelize-typescript';
+import { Dialect } from "sequelize";
 import { config } from '../config';
 import logger from "../middleware/loggerMiddleware";
-import { Dialect } from "sequelize";
+import { Sequelize, SequelizeOptions } from 'sequelize-typescript';
 
 
 const options: SequelizeOptions | undefined = {
@@ -42,7 +42,7 @@ export const sequelize = new Sequelize(
 );
 
 /**
- * 建立连接mysql
+ * 建立mysql连接
  */
 const db = async () => {
     try {
