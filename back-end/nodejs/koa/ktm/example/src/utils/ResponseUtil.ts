@@ -3,7 +3,7 @@ import { Context } from "koa";
 /**
  * 统一响应工具
  */
-export default class Response {
+export default class ResponseUtil {
 
     /**
      * 成功

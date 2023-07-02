@@ -22,14 +22,14 @@ const config = {
                 filename: "logs/access.log",
             },
             db: {
-                type: "file",
+                type: "file", // 输出类型，console 或 file
                 filename: "logs/db.log",
             }
         },
         categories: {
             default: {
                 appenders: ["cheese"],
-                level: "info" // error or info level
+                level: "info" // 记录info以上的级别，info、warn 和 error 级别的日志。
             },
             access: {
                 appenders: ["access"],

@@ -1,23 +1,22 @@
-import "reflect-metadata";
-import { Container} from "inversify";
-// import { InversifyKoaServer } from "inversify-koa-utils";
+import "reflect-metadata"; 
+import dotenv from "dotenv";
+dotenv.config(); // dotenv.config({path:'./.env'});
+import "./src/ioc/loader";
+import db from "./src/db";
+import { Container } from "inversify";
 import { config } from "./src/config";
 import AppUtil from "./src/utils/AppUtil";
-import { autoProvide, buildProviderModule, fluentProvide } from "inversify-binding-decorators";
-import container from "./src/config/inversify.config";
-import {  interfaces, InversifyKoaServer, TYPE } from 'inversify-koa-utils';
+import {bind} from "./src/config/inversify.config";
+import { InversifyKoaServer } from 'inversify-koa-utils';
+import { buildProviderModule } from "inversify-binding-decorators";
 
 
-
-
-
-// 将所有的 Controllers 自动绑定到容器中
-// const controllers =container.getAll<interfaces.Controller>(TYPE.Controller);
-
-/**
- * 创建服务
- */
-const server = new InversifyKoaServer(container); // 设置控制器解析器
+db(); // 连接数据库
+const container = new Container();
+container.load(buildProviderModule()); // 容器就拥有了对所有的类注入的能力
+bind(container);
 const appUtil = new AppUtil();
+const server = new InversifyKoaServer(container); // 设置控制器解析器
 server.setConfig(appUtil.setMiddleware);
-server.build().listen(config.server.port, appUtil.callback);
+const app = server.build()
+app.listen(config.server.port, appUtil.callback);

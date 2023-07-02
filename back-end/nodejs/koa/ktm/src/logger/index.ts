@@ -1,4 +1,4 @@
-import { configure, getLogger } from "log4js";
+import log4js, { configure, getLogger } from "log4js";
 import config from "../config";
 
 

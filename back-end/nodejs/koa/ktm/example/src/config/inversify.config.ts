@@ -2,11 +2,17 @@
 
 import { Container } from "inversify";
 import { Warrior, Weapon, ThrowableWeapon, TestService } from "../services/TestService";
-import { Ninja, Katana, Shuriken, TestServiceImpl } from "../services/impl/TestServiceImpl";
+// import { Ninja, Katana, Shuriken, TestServiceImpl } from "../services/impl/TestServiceImpl";
 import { TYPES } from "../services/types";
-import TestController from "../controllers/TestController";
+import  TestController from "../controllers/TestController";
 import { interfaces,  TYPE } from 'inversify-koa-utils';
 import { buildProviderModule } from "inversify-binding-decorators";
+// import { TestServiceImpl } from "../services/impl/TestServiceImpl";
+import  TestServiceImpl from "../services/impl/TestServiceImpl";
+import { Sequelize } from "sequelize";
+import { sequelize } from "../db";
+import Test from "../models/Test";
+import TestDao from "../dao/TestDao";
 
 /**
  * 依赖注入容器
@@ -29,10 +35,10 @@ class Inversify extends Container {
         /**
          * bind service
          */
-        this.bind<Warrior>(TYPES.Warrior).to(Ninja);
-        this.bind<Weapon>(TYPES.Weapon).to(Katana);
-        this.bind<ThrowableWeapon>(TYPES.ThrowableWeapon).to(Shuriken);
-        // this.bind<TestService>(TYPES.TestService).to(TestServiceImpl);
+        // this.bind<Warrior>(TYPES.Warrior).to(Ninja);
+        // this.bind<Weapon>(TYPES.Weapon).to(Katana);
+        // this.bind<ThrowableWeapon>(TYPES.ThrowableWeapon).to(Shuriken);
+        this.bind<TestService>(TYPES.TestService).to(TestServiceImpl);
 
         /**
          * bind others
@@ -42,3 +48,10 @@ class Inversify extends Container {
 }
 
 export default new Inversify();
+
+// Test.initialize(sequelize)
+export const bind=(container:Container)=>{
+    container.bind<Sequelize>("Sequelize").toConstantValue(sequelize);
+    // container.bind<typeof Test>("Test").toConstantValue(Test);
+    // container.bind<TestDao>("TestDao").to(TestDao);
+}

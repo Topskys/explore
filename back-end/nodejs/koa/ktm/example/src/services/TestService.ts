@@ -1,3 +1,5 @@
+import Test from "../models/Test";
+
 export interface Warrior {
     fight(): string;
     sneak(): string;
@@ -5,6 +7,7 @@ export interface Warrior {
 
 export interface Weapon {
     hit(): string;
+    use(): void;
 }
 
 export interface ThrowableWeapon {
@@ -13,5 +16,6 @@ export interface ThrowableWeapon {
 
 
 export interface TestService {
-    getHello(n:number):number;
+    getHello(n: number): number;
+    findTestByUsername(username: string): Promise<Test | null>;
 }
