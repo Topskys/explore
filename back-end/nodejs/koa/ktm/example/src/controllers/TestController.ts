@@ -10,7 +10,7 @@ import { validate } from 'class-validator';
 import ResponseUtil from '../utils/ResponseUtil';
 import { createHash } from "crypto"
 
-@controller("/user")
+@controller("/test")
 // @injectable()
 @provideThrowable(TYPE.Controller, "TestController")
 export default class TestController implements interfaces.Controller {

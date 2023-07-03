@@ -1,7 +1,17 @@
 import "../controllers/TestController";
+import "../controllers/UserController";
+import "../controllers/ProductController";
+import "../controllers/UploadController";
 import "../services/impl/TestServiceImpl";
+import "../services/impl/UserServiceImpl";
+import "../services/impl/ProductServiceImpl";
+import "../services/impl/UploadServiceImpl";
 import "../models/Test";
+import "../models/User";
+import "../models/Product";
 import "../dao/TestDao";
+import "../dao/UserDao";
+import "../dao/ProductDao";
 
 
 

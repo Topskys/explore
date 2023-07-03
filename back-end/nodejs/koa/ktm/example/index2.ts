@@ -1,11 +1,11 @@
 // import { myContainer } from "./inversify.config";
 // import { TYPES } from "./types";
 // import { Warrior } from "./interfaces";
-import "reflect-metadata";
+// import "reflect-metadata";
 
-import { myContainer } from "./src/config/inversify.config";
-import { TestService, Warrior } from "./src/services/TestService";
-import { TYPES } from "./src/services/types";
+// import { myContainer } from "./src/config/inversify.config";
+// import { TestService, Warrior } from "./src/services/TestService";
+// import { TYPES } from "./src/services/types";
 // 
 // import {con} from "./src/config/tsyringe.config"
 // import {container} from "tsyringe"

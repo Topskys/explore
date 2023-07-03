@@ -6,6 +6,32 @@ import { ModelAttributes, InitOptions, Sequelize, DataTypes } from "sequelize";
 import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, BeforeCreate, ModelStatic } from 'sequelize-typescript';
 
 
+// decorate(injectable(), Model)
+// @provide(Symbol.for("Test"))
+@Table({ tableName: "test" })
+export default class Test extends Model {
+    @PrimaryKey
+    @AutoIncrement
+    @Column({
+        type: DataType.INTEGER,
+    })
+    id!: number;
+
+    @Column @Column({
+        type: DataType.STRING,
+        unique: true,
+        comment: "账户名"
+    })
+    username!: string;
+
+    @Column({
+        type: DataType.STRING,
+        comment: "用户密码"
+    })
+    password!: string;
+}
+
+
 // export default class Test extends Model {
 //     constructor(){
 //         super();
@@ -35,29 +61,3 @@ import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, BeforeCreate
 //         })
 //     }
 // }
-
-
-// decorate(injectable(), Model)
-// @provide(Symbol.for("Test"))
-@Table({ tableName: "user" })
-export default class Test extends Model<Test> {
-    @PrimaryKey
-    @AutoIncrement
-    @Column({
-        type: DataType.INTEGER,
-    })
-    id!: number;
-
-    @Column @Column({
-        type: DataType.STRING,
-        unique: true,
-        comment: "账户名"
-    })
-    username!: string;
-
-    @Column({
-        type: DataType.STRING,
-        comment: "用户密码"
-    })
-    password!: string;
-}

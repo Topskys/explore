@@ -1,18 +1,18 @@
 // file inversify.config.ts
 
 import { Container } from "inversify";
-import { Warrior, Weapon, ThrowableWeapon, TestService } from "../services/TestService";
-// import { Ninja, Katana, Shuriken, TestServiceImpl } from "../services/impl/TestServiceImpl";
-import { TYPES } from "../services/types";
-import  TestController from "../controllers/TestController";
-import { interfaces,  TYPE } from 'inversify-koa-utils';
-import { buildProviderModule } from "inversify-binding-decorators";
+// import { Warrior, Weapon, ThrowableWeapon, TestService } from "../services/TestService";
+// // import { Ninja, Katana, Shuriken, TestServiceImpl } from "../services/impl/TestServiceImpl";
+// import { TYPES } from "../services/types";
+// import  TestController from "../controllers/TestController";
+// import { interfaces,  TYPE } from 'inversify-koa-utils';
+// import { buildProviderModule } from "inversify-binding-decorators";
 // import { TestServiceImpl } from "../services/impl/TestServiceImpl";
-import  TestServiceImpl from "../services/impl/TestServiceImpl";
-import { Sequelize } from "sequelize";
-import { sequelize } from "../db";
-import Test from "../models/Test";
-import TestDao from "../dao/TestDao";
+// import  TestServiceImpl from "../services/impl/TestServiceImpl";
+// import { Sequelize } from "sequelize";
+// import { sequelize } from "../db";
+// import Test from "../models/Test";
+// import TestDao from "../dao/TestDao";
 
 /**
  * 依赖注入容器
@@ -22,15 +22,15 @@ import TestDao from "../dao/TestDao";
  * 然后用 container 代替方式一类的 this 执行绑定即可。
  * 最后在程序入口文件实例化服务 new InversifyKoaServer(以new Intersify()或container为参数)。
  */
-class Inversify extends Container {
+// class Inversify extends Container {
 
-    constructor() {
-        super();
+//     constructor() {
+//         super();
 
         /**
          * bind controller
          */
-        this.bind<interfaces.Controller>(TYPE.Controller).to(TestController).whenTargetNamed('TestController');
+        // this.bind<interfaces.Controller>(TYPE.Controller).to(TestController).whenTargetNamed('TestController');
         
         /**
          * bind service
@@ -38,14 +38,14 @@ class Inversify extends Container {
         // this.bind<Warrior>(TYPES.Warrior).to(Ninja);
         // this.bind<Weapon>(TYPES.Weapon).to(Katana);
         // this.bind<ThrowableWeapon>(TYPES.ThrowableWeapon).to(Shuriken);
-        this.bind<TestService>(TYPES.TestService).to(TestServiceImpl);
+        // this.bind<TestService>(TYPES.TestService).to(TestServiceImpl);
 
         /**
          * bind others
          */
-        this.load(buildProviderModule());
-    }
-}
+        // this.load(buildProviderModule());
+//     }
+// }
 
 // export default new Inversify();
 
