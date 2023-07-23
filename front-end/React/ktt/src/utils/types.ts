@@ -17,14 +17,35 @@ export interface LoginResType {
 
 
 export interface GroupBuyType {
-    id: "",
-    name: string,
+    order?: string,
+    state?: string,
+    id?: number | string,
+    name?: string,
+    current?: number,
+    pageSize?: number,
+    products?: string,
+    shop?: string,
     startTime?: string,
     endTime?: string,
-    state: string,
-    current?:number,
-    pageSize?: number,
-    order?:string,
-    products?:string,
-    shop?:string,
+    slogan?: string,
+    preTime?: string,
+    showHome?: string,
+    tag?: string | number,
+    target?: number,
+    limitBuy?: number,
+    deliverWay?: number,
+    pickTime?: string,
+}
+
+export interface TagType {
+    id?: number | string | undefined,
+    name?: string,
+    pic?: string,
+}
+
+export interface GroupBuyProductType {
+    groupBuyId: string | number | undefined,
+    current?: string | number | undefined,
+    pageSize?: string | number | undefined,
+    size?: string | number | undefined,
 }

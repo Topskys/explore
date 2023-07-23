@@ -37,3 +37,30 @@ code {
   color: #1677ff;
   margin: 20px 0 50px;
 }
+
+/* admin.tsx */
+.sider{
+  overflow-x:hidden;
+}
+.sider::-webkit-scrollbar{
+  width:2px;
+  background-color: #ccc;
+}
+
+.main-content{
+  overflow-x: hidden;
+  padding:20px;
+}
+
+.mt8{
+  margin-top:8px;
+}
+
+/* CreateCroupInfo */
+.CreateGroupInfo .ant-input{
+  display: inline-block;
+  width: auto;
+  max-width: 600px;
+  min-width: 400;
+
+}

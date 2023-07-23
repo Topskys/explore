@@ -1,11 +1,14 @@
 import React from 'react'
 import { FileOutlined, PieChartOutlined, UserOutlined, TeamOutlined, DesktopOutlined } from '@ant-design/icons';
-import { Breadcrumb, Layout, Menu, theme } from 'antd';
+import { Layout, Menu, theme } from 'antd';
 import { useState } from 'react';
-const { Header, Content, Footer, Sider } = Layout;
+import "./css/sideMenu.css";
+// 高阶组件，用于多层出书props
+import {widthRouter} from "react-router-dom"; 
+
+const { Sider } = Layout;
 
 function getItem(label, key, icon, children) {
-
   return {
     key,
     icon,
@@ -15,24 +18,40 @@ function getItem(label, key, icon, children) {
 }
 
 const items = [
-  getItem('Option 1', '1', <PieChartOutlined />),
-  getItem('Option 2', '2', <DesktopOutlined />),
-  getItem('User', 'sub1', <UserOutlined />, [
-    getItem('Tom', '3'),
-    getItem('Bill', '4'),
-    getItem('Alex', '5'),
+  getItem('首页', '/admin', <PieChartOutlined />),
+  getItem('内存分析', '2', <DesktopOutlined />),
+  getItem('用户管理', 'sub1', <UserOutlined />, [
+    getItem('用户列表', '3'),
+    getItem('编辑用户', '5'),
   ]),
-  getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
-  getItem('Files', '9', <FileOutlined />),
+  getItem('权限管理', '/admin/right', <TeamOutlined />, [
+    getItem('权限列表', '6'),
+    getItem('角色列表', '8')
+  ]),
+  getItem('文件', '9', <FileOutlined />),
 ];
 
-export default function SideMenu() {
+function SideMenu(props) {
   const [collapsed, setCollapsed] = useState(false);
+  const {
+    token: { colorBgContainer },
+  } = theme.useToken();
+
+  const onChange = (e) => {
+    console.log('click ', e);
+    props.history.push(e.path);
+  };
 
   return (
-    <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
-      <div className="demo-logo-vertical" />
-      <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
+    <Sider style={{ background: colorBgContainer }}
+      collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
+      <div className="side-logo" >
+        Ant Design Pro
+      </div>
+      <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} onClick={onChange} />
     </Sider>
   )
 }
+
+// 导出包装生成的高阶组件，以底层组件获取高层组件的props
+export default widthRouter(SideMenu);

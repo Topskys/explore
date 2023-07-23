@@ -40,14 +40,14 @@ function Admin() {
                 <div className="logo">Logo</div>
             </Header>
             <Layout >
-                <Sider style={siderStyle}>
+                <Sider style={siderStyle} className="sider">
                     <Menu
                         mode="inline"
                         items={menus}
                         onClick={onClick}
                     />
                 </Sider>
-                <Content>
+                <Content className="main-content">
                     <Outlet />
                 </Content>
             </Layout>

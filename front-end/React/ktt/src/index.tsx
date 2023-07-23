@@ -8,12 +8,17 @@ import 'antd/dist/reset.css';
 // 引用store（redux）
 import store from "./store"
 import { Provider } from 'react-redux';
+// antd国际化
+import locale from 'antd/locale/zh_CN';
+import { ConfigProvider } from "antd"
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <ConfigProvider locale={locale}>
+        <App />
+      </ConfigProvider>
     </Provider>
   </React.StrictMode>
 );

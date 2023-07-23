@@ -18,7 +18,7 @@ export default function SandBox() {
     <Layout style={{
       minHeight: '100vh',
     }}>
-      <SideMenu/>
+      <SideMenu />
       <Layout>
         <TopHeader />
         <Content

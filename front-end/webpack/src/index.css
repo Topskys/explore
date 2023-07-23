@@ -1,0 +1,10 @@
+/* url会交给url-loader处理 */
+@import url(assets/reset.css);
+
+body {
+    min-height: 100vh;
+    background-color: #f4f8fb;
+    /* url会交给url-loader处理 */
+    background-image: url(assets/bg.jpg);
+    background-size: cover;
+}
