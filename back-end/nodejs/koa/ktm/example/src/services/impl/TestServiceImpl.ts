@@ -5,6 +5,8 @@ import { TYPES } from '../types';
 import { provide } from 'inversify-binding-decorators';
 import Test from "../../models/Test";
 import TestDao from "../../dao/TestDao";
+import { Context } from "koa";
+import User from "../../models/User";
 
 
 
@@ -46,8 +48,8 @@ import TestDao from "../../dao/TestDao";
 @provide(Symbol.for("TestService"))
 export default class TestServiceImpl implements TestService {
 
-    constructor(@inject("TestDao") private testDao: TestDao){
-       // super() // or 'tests' if you want to use plural table name in database
+    constructor(@inject("TestDao") private testDao: TestDao) {
+        // super() // or 'tests' if you want to use plural table name in database
     }
 
     getHello(n: number): number {
@@ -56,8 +58,27 @@ export default class TestServiceImpl implements TestService {
     }
 
     async findTestByUsername(username: string): Promise<Test | null> {
-        const test=await this.testDao.findTestByUsername(username);
+        const test = await this.testDao.findTestByUsername(username);
         console.log("-TestServiceImpl-----4----", test)
         return test
+    }
+
+
+    async getList(ctx: Context): Promise<any> {
+        const tests = await this.testDao.findAll()
+        const users = await User.findAll()
+        const formatData = (arr1: any[], arr2: any[]) => {
+            return arr1.map((a1) => {
+                const t = a1.toJSON()
+                arr2.map(a2 => {
+                    const u = a2.toJSON()
+                    if (u.id == t.user_id) {
+                        t.children ? t.children.push({...u,role:['admin']}) : (t["children"] = [u])
+                    }
+                })
+                return t
+            })
+        }
+        return formatData(tests, users);
     }
 }

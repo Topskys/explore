@@ -49,5 +49,10 @@ export default class TestController implements interfaces.Controller {
         }
         return resUtil.error(ctx, "该用户名未注册");
     }
+
+    @httpGet("/list")
+    getList(ctx:Context){
+        return this.ts.getList(ctx);
+    }
 }
 

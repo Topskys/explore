@@ -29,6 +29,12 @@ export default class Test extends Model {
         comment: "用户密码"
     })
     password!: string;
+
+    @Column({
+        type: DataType.INTEGER,
+        comment: "用户id"
+    })
+    user_id!: number;
 }
 
 

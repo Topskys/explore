@@ -16,4 +16,8 @@ export default class TestDao {
         console.log("-TestDao-----5----", test)
         return test
     }
+
+    findAll(opt?:any){
+        return Test.findAll(opt)
+    }
 }

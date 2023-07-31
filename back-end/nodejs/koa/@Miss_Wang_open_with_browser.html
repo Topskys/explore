@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>荣誉证书</title>
+    <!-- react@18 -->
+    <script crossorigin src="https://cdn.bootcss.com/babel-standalone/6.26.0/babel.js"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        var { useEffect, useRef } = React;
+
+        function handleDate() {
+            var date = new Date();
+            return date.getFullYear() + "年" + (date.getMonth() + 1) + "月" + date.getDate() + "日"
+        }
+
+        var gainer = "王正芝"
+        var config = {
+            title: "荣誉证书",
+            body: {
+                congratulation: "祝贺" + gainer + "女士：",
+                context: "你被评为" + new Date().getFullYear() + "年度全民最强大脑，特发此证，以资鼓励。",
+            },
+            tail: {
+                unit: "托普斯盖魔法学院",
+                date: handleDate(),
+            },
+            seal: {
+                unit: '托普斯盖魔法学院',
+                name: '智商检验专用章',
+                color: '#DC143C',
+            }
+        }
+
+        var appSty = {
+            width: "1123px",
+            height: "694px",
+            // padding: '20px',
+            boxShadow: "0 0 5px 10px #ccc",
+            borderRadius: "3px",
+            margin: "0 auto",
+            overflow: "hidden",
+            boxSizing: 'border-box',
+        }
+        var honor__warp = {
+            padding: '0% 4% 4% 4%',
+            overflow: "hidden",
+            boxSizing: 'border-box',
+        }
+        var honor__title = {
+            color: '#f00',
+            fontSize: "70px",
+            letterSpacing: "40px",
+            family: "Helvetica",
+        }
+        var honor__body = {
+            fontSize: "30px",
+            letterSpacing: "20px",
+            lineHeight: "60px",
+            fontWeight: "bold",
+            margin: "4%",
+            overflow: "hidden",
+            boxSizing: 'border-box',
+            marginTop: "8%"
+        }
+
+        var honor__tail = {
+            position: "relative",
+            height: "200px",
+            float: "right",
+        }
+
+
+        var honor__sign = {
+            width: "200px",
+            height: "200px",
+            padding: "15px",
+            boxSizing: 'border-box',
+            position: "relative",
+        }
+
+        var honor__seal = {
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: 'translate(-50%,-50%)',
+            ZIndex: "100",
+        }
+
+        var sign__txt = {
+            width: "180px",
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: 'translate(-50%,-50%)',
+            ZIndex: "1",
+            textAlign: "right",
+            lineHeight: "30px",
+            letterSpacing: "5px",
+        }
+
+        function Container() {
+            return (
+                <div style={honor__warp}>
+                    <center><h1 style={honor__title}>{config.title}</h1></center>
+                    <div style={honor__body}>
+                        <div>{config.body.congratulation}</div>
+                        <div style={{ textIndent: "3.3em", margin: "20px" }}>{config.body.context}</div>
+                    </div>
+                    <div style={honor__tail}>
+                        <div style={honor__sign}>
+                            <div style={sign__txt}>
+                                {config.tail.unit}
+                                <br />
+                                {config.tail.date}
+                            </div>
+                            <span style={honor__seal}><Seal /></span>
+                        </div>
+                    </div>
+
+                </div>
+            )
+        }
+
+        var Seal = function () {
+            var canvasRef = useRef(null);
+            /**
+             * 
+             * @param company 单位
+             * @param name 印章名称
+             * @param color 颜色
+             * @returns boolean 
+             */
+            const handleCanvas = (company, name, color) => {
+                const canvas = canvasRef.current;
+                if (!canvas) return;
+                const ctx = canvas.getContext('2d', {
+                    willReadFrequently: true,
+                });
+                if (!ctx) return;
+                // ctx.scale(1/2,1/2);
+                const width = canvas.width;
+                const height = canvas.height;
+                // ctx.clearRect(width/2,height/2,width,height);
+
+                // 绘制圆形印章边框
+                ctx.lineWidth = 3;
+                ctx.strokeStyle = color; // '#f00'
+                ctx.beginPath();
+                ctx.arc(width / 2, height / 2, (width - 10) / 2, 0, Math.PI * 2);
+                ctx.stroke();
+
+                // 绘制印章五角星
+                createStar(ctx, width / 2, height / 2, 20, color, 0);
+
+                // 绘制弧形印章名称
+                // ctx.scale(1/2, 1/2);
+                ctx.font = "14px Helvetica";
+                ctx.textBaseline = "middle";
+                ctx.textAlign = "center";
+                ctx.lineWidth = 1
+                ctx.fillStyle = color;
+                ctx.fillText(name, width / 2, (height + 110) / 2);
+                ctx.save();
+
+                // 绘制印章弧形文本
+                ctx.translate(width / 2, height / 2);
+                ctx.font = "18px Helvetica";
+                ctx.fillStyle = color;
+                var len = company.length
+                var angle = 4 * Math.PI / (3 * (len - 1));// 字间角度
+                var chars = company.split("");
+                var c;
+                for (var i = 0; i < len; i++) {
+                    c = chars[i]
+                    if (i == 0)
+                        ctx.rotate(5 * Math.PI / 6);
+                    else
+                        ctx.rotate(angle);
+                    ctx.save();
+                    ctx.translate(90, 0); // 让文字和x周垂直
+                    ctx.rotate(Math.PI / 2); // 旋转90度，让文字平行于x周
+                    ctx.fillText(c, 0, 28); // 文字中心点
+                    ctx.restore();
+                }
+                return true
+            }
+
+            /**
+             * 
+             * @param ctx canvas context
+             * @param x 五角星中心坐标（x,y）
+             * @param y 
+             * @param radius 中心到顶点的距离，为0时一个顶点在对称轴上
+             * @param color 
+             * @param rotate 绕对称轴旋转的弧度
+             */
+            var createStar = (ctx, x, y, radius, color, rotate) => {
+                ctx.save();
+                ctx.fillStyle = color;
+                ctx.translate(x, y);
+                ctx.rotate(Math.PI + rotate); // 旋转
+                ctx.beginPath(); // 创建路径
+                var _x = Math.sin(0);
+                var _y = Math.cos(0);
+                var dig = Math.PI / 5 * 4;
+                // 绘制五角星的五条边
+                for (var index = 0; index < 5; index++) {
+                    var _x = Math.sin(index * dig);
+                    var _y = Math.cos(index * dig);
+                    ctx.lineTo(_x * radius, _y * radius);
+                }
+                ctx.closePath()
+                ctx.stroke()
+                ctx.fill()
+                ctx.restore()
+            }
+
+            var flag = false;
+
+            useEffect(() => {
+                if (flag) return;
+                // 防止重绘
+                // @ts-ignore
+                flag = handleCanvas(config.seal.unit, config.seal.name, config.seal.color); // '#eb4b59'
+            }, [])
+
+            return (
+                <canvas
+                    ref={canvasRef}
+                    width={180}
+                    height={180}
+                >
+                </canvas>
+            )
+        }
+
+        var Watermark = function (props) {
+            var WatermarkParentSty = {
+                position: "relative",
+            }
+
+            var p = {
+                text: props.content || "watermark",
+                fontSize: 16,
+                gap: 5
+            };
+            var div;
+
+            var parentRef = useRef(null);
+
+            function createWatermark(p) {
+                var canvas = document.createElement("canvas");
+                // 显示倍率
+                var dpr = window.devicePixelRatio || 1;
+                var fontSize = p.fontSize * dpr;
+                var font = fontSize + "px serif";
+                // 画板对象
+                var ctx = canvas.getContext("2d");
+                // 获取文字的宽度
+                ctx.font = font;
+                var { width } = ctx.measureText(p.text);
+                var canvasSize = Math.max(100, width) + p.gap * dpr;
+                // 设置画板大小
+                canvas.width = canvasSize;
+                canvas.height = canvasSize;
+
+                ctx.translate(canvas.width / 2, canvas.height / 2);
+                ctx.rotate((Math.PI / 180) * -45); // 倒序旋转-45°
+                ctx.fillStyle = "rgba(0,0,0,0.3)";
+                ctx.font = font;
+                ctx.textAlign = "center";
+                ctx.textBaseline = "middle";
+                ctx.fillText(p.text, 0, 0);
+
+                return {
+                    base64: canvas.toDataURL(),
+                    size: canvasSize,
+                    styleSize: canvasSize / dpr,
+                };
+            }
+
+            function handleWatermark() {
+                var pRef = parentRef.current
+                if (!pRef) return;
+                div && div.remove(); // 消除div原有值
+                var { base64, styleSize } = createWatermark(p);
+
+                div = document.createElement("div");
+                // div style
+                div.style.backgroundImage = `url(${base64})`;
+                div.style.backgroundSize = `${styleSize}px ${styleSize}px`;
+                div.style.backgroundRepeat = "repeat";
+                div.style.zIndex = 9999;
+                div.style.position = "absolute";
+                div.style.inset = 0; // 子元素与父元素的距离
+                div.style.pointerEvents = "none"; // 阻止元素事件
+                pRef.appendChild(div); // 把div加到父元素中
+            }
+            useEffect(() => {
+                handleWatermark()
+            }, [props])
+            return (
+                <div style={WatermarkParentSty} ref={parentRef}>
+                    {props.children}
+                </div>
+            )
+        }
+
+
+
+        function App() {
+
+            useEffect(() => {
+
+            }, []);
+            
+            return (
+                <div style={appSty}>
+                    <Watermark content={gainer}>
+                        <Container />
+                    </Watermark>
+                </div>
+            )
+        }
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+
+</html>

@@ -1,3 +1,4 @@
+import { Context } from "koa";
 import Test from "../models/Test";
 
 export interface Warrior {
@@ -18,4 +19,5 @@ export interface ThrowableWeapon {
 export interface TestService {
     getHello(n: number): number;
     findTestByUsername(username: string): Promise<Test | null>;
+    getList(ctx: Context): Promise<any>;
 }
