@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas</title>
+</head>
+<body>
+    <canvas id="c1" width="600" height="400" style="border: 1px solid #ccc;"></canvas>
+    <script>
+        var c1 = document.getElementById("c1");
+        // 获取绘图上下文对象
+        var ctx = c1.getContext("2d");
+        // 将画布的原点移动到中心位置，注意旋转和位移的顺序很重要，先位移再旋转再缩放
+        ctx.translate(300, 200);
+        // 将画布坐标系缩放为原来的0.5倍
+        ctx.scale(0.5, 0.5);
+        // 顺时针旋转画布坐标系45度
+        ctx.rotate(Math.PI / 4); 
+        // 绘制矩形
+        ctx.fillRect(-250, -25, 500, 50);
+    </script>
+</body>
+</html>

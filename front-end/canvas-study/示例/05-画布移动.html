@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #canvas {
+            border: 1px solid gray;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas" width="800" height="600"></canvas>
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        const circles = []; // 存储圆
+        const statusConfig = { // 状态配置
+            idle: 0,
+            drag_start: 1,
+            dragging: 2,
+            move_start: 3, // 画布移动开始
+            moving: 4, // 画布移动中
+        }
+        const canvasInfo = {
+            status: statusConfig.idle,
+            dragTarget: null,
+            lastPosition: { // 鼠标最后一次位置
+                x: null,
+                y: null
+            },
+            offsetPosition: { // 图形偏移位置
+                x: null,
+                y: null
+            },
+            offset: { // 控制画布偏移量
+                x: 0,
+                y: 0
+            },
+            scale: 1, // 缩放比例
+            scaleStep: 0.1, // 缩放步长
+            minScale: 0.1, // 最小缩放比例
+            maxScale: 2, // 最大缩放比例
+            offsetMousePosition: { // 鼠标相对于画布的位置
+                x: null,
+                y: null
+            }
+
+        }
+
+
+        // 绘制圆
+        const drawCircle = (ctx, cx, cy, r) => {
+            ctx.save()
+            ctx.beginPath();
+            ctx.strokeStyle = 'blue';
+            ctx.arc(cx, cy, r, 0, Math.PI * 2);
+            ctx.stroke();
+            ctx.closePath();
+            ctx.restore()
+        }
+
+        drawCircle(ctx, 100, 100, 50);
+        circles.push({ x: 100, y: 100, r: 50 });
+        drawCircle(ctx, 200, 200, 25);
+        circles.push({ x: 200, y: 200, r: 25 });
+
+
+        // 获取画布上的点位置
+        const getCanvasPosition = (e, offset = { x: 0, y: 0 }, scale = 1) => {
+            return {
+                x: (e.offsetX - offset.x) / scale,
+                y: (e.offsetY - offset.y) / scale
+            }
+        }
+
+        // 获取鼠标位置，处理移动画布时抖动问题
+        const getMousePosition = (e) => {
+            return {
+                x: e.offsetX,
+                y: e.offsetY
+            }
+        }
+
+
+        // 获取两点之间的距离
+        const getDistance = (p1, p2) => {
+            return Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2))
+        }
+
+        // 判断该点是否在圆内
+        const ifInCircle = (pos) => {
+            for (let i = 0; i < circles.length; i++) {
+                return getDistance(circles[i], pos) < circles[i].r && circles[i];
+            }
+        }
+
+        const render = () => {
+            ctx.setTransform(canvasInfo.scale, 0, 0, canvasInfo.scale, canvasInfo.offset.x, canvasInfo.offset.y);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            circles.forEach(c => drawCircle(ctx, c.x, c.y, c.r));
+        }
+
+        // 阻止右键默认事件
+        canvas.oncontextmenu = (e) => {
+            return false;
+        }
+
+
+        canvas.addEventListener('mousedown', (e) => {
+            e.preventDefault();
+            const { drag_start: DRAG_START, move_start: MOVE_START } = statusConfig
+            const canvasPosition = getCanvasPosition(e, canvasInfo.offset, canvasInfo.scale);
+            const circle = ifInCircle(canvasPosition);
+            if (e.button === 0) {
+                // 左键按下    
+                if (!circle) return; // 鼠标不在圆内，不处理
+                canvasInfo.dragTarget = circle;
+                canvasInfo.status = DRAG_START;
+                canvasInfo.lastPosition = canvasPosition;
+                canvasInfo.offsetPosition = canvasPosition;
+            } else if (e.button === 2) {
+                // 右键按下
+                if (circle) return; // 鼠标在圆内，不处理
+                canvasInfo.status = MOVE_START;
+                canvasInfo.offsetMousePosition = getMousePosition(e);
+            }
+        })
+
+        canvas.addEventListener('mousemove', (e) => {
+            const { drag_start: DRAG_START, dragging: DRAGGING, moving: MOVING, move_start: MOVE_START } = statusConfig
+            const canvasPosition = getCanvasPosition(e, canvasInfo.offset, canvasInfo.scale);
+
+            // 拖拽时鼠标样式
+            canvas.style.cursor = ifInCircle(canvasPosition) ? 'grab' : 'default'
+
+            if (canvasInfo.status === DRAG_START && getDistance(canvasPosition, canvasInfo.lastPosition) > 5) {
+                // 拖拽开始
+                canvasInfo.status = DRAGGING;
+                canvasInfo.offsetPosition = canvasPosition;
+
+            } else if (canvasInfo.status === DRAGGING) {
+                const { dragTarget } = canvasInfo;
+                dragTarget.x += canvasPosition.x - canvasInfo.offsetPosition.x;
+                dragTarget.y += canvasPosition.y - canvasInfo.offsetPosition.y;
+
+                render();
+            } else if (canvasInfo.status === MOVE_START && getDistance(canvasPosition, canvasInfo.lastPosition) > 5) {
+                canvasInfo.status = MOVING
+                canvasInfo.offsetMousePosition = getMousePosition(e);
+            } else if (canvasInfo.status === MOVING) {
+                // 移动画布
+                const mousePosition = getMousePosition(e);
+                canvasInfo.offset.x += mousePosition.x - canvasInfo.offsetMousePosition.x;
+                canvasInfo.offset.y += mousePosition.y - canvasInfo.offsetMousePosition.y;
+
+                render();
+                canvasInfo.offsetMousePosition = mousePosition
+            }
+        })
+
+        canvas.addEventListener('mouseup', (e) => {
+            const { dragging: DRAGGING, moving: MOVING } = statusConfig
+            if ([DRAGGING, MOVING].includes(canvasInfo.status)) {
+                canvasInfo.status = statusConfig.idle;
+            }
+        })
+
+        canvas.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            const canvasPosition = getCanvasPosition(e, canvasInfo.offset, canvasInfo.scale);
+            // 缩放中心点
+            const { scaleStep, minScale, maxScale } = canvasInfo
+            const deltaX = canvasPosition.x / canvasInfo.scale * scaleStep;
+            const deltaY = canvasPosition.y / canvasInfo.scale * scaleStep;
+
+            // 缩放
+            if (e.wheelDelta > 0 && canvasInfo.scale < maxScale) {
+                // 放大操作
+                canvasInfo.offset.x -= deltaX;
+                canvasInfo.offset.y -= deltaY;
+                canvasInfo.scale += scaleStep;
+            } else if (e.wheelDelta < 0 && canvasInfo.scale > minScale) {
+                // 缩小操作
+                canvasInfo.offset.x += deltaX;
+                canvasInfo.offset.y += deltaY;
+                canvasInfo.scale -= scaleStep;
+            }
+            render();
+        })
+
+    </script>
+</body>
+
+</html>

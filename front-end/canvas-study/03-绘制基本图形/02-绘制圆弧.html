@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas</title>
+</head>
+
+<body>
+    <canvas id="c1" width="600" height="400" style="width: 800px;height: 600px;">
+        Canvas not supported.
+        当前浏览器不支持canvas，请下载最新的浏览器
+        <a href="https://www.microsoft.com/en-us/edge/download">立即下载</a>
+    </canvas>
+    <script>
+        var c1 = document.getElementById("c1");
+        // 判断是否有绘图上下文对象
+        if (!c1.getContext) {
+            window.alert("当前浏览器不支持canvas，请下载最新的浏览器");
+        }
+        
+        // 获取绘图上下文对象
+        var ctx = c1.getContext("2d");
+        // 绘制圆弧
+        ctx.beginPath();
+        // 绘制圆弧的起始点坐标为(100,50)，半径为40，从-π/2开始，到π结束，逆时针方向
+        ctx.arc(100, 50, 40, -Math.PI / 2, Math.PI); // x,y,r,startAngle,endAngle,counterclockwise(默认false逆时针)
+        ctx.stroke();
+        ctx.closePath();
+
+        // 示例：绘制圆弧笑脸，方式一
+        ctx.beginPath(); // 下笔
+        ctx.arc(100, 150, 40, 0, Math.PI*2, true); // 顺时针绘制圆
+        ctx.stroke();
+        ctx.closePath(); // 抬起笔，结束绘图路径
+        // 绘制左眼
+        ctx.beginPath();
+        ctx.arc(80, 150, 10, 0, Math.PI*2); // 顺时针绘制圆
+        ctx.stroke();
+        ctx.closePath();
+        // 绘制右眼
+        ctx.beginPath();
+        ctx.arc(120, 150, 10, 0, Math.PI*2); // 顺时针绘制圆
+        ctx.stroke();
+        ctx.closePath();
+        // 绘制嘴巴
+        ctx.beginPath();
+        ctx.arc(100, 170, 10, 0,Math.PI);
+        ctx.fill();
+        ctx.closePath();
+
+        // 示例：绘制圆弧笑脸，方式二
+        ctx.beginPath(); // 下笔
+        ctx.arc(100, 250, 40, 0, Math.PI*2, true); // 顺时针绘制圆
+        // 绘制左眼
+        ctx.moveTo(90, 250); // 抬笔，把笔移动到90,250的位置，解决连笔问题
+        ctx.arc(80, 250, 10, 0, Math.PI*2); 
+        // 绘制右眼
+        ctx.moveTo(130, 250);
+        ctx.arc(120, 250, 10, 0, Math.PI*2); 
+        // 绘制嘴巴
+        ctx.moveTo(90, 270);
+        ctx.arc(100, 270, 10, 0,Math.PI);
+        ctx.stroke();
+        ctx.closePath();
+
+
+        
+    </script>
+</body>
+
+</html>

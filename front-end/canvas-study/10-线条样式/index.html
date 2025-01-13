@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas</title>
+</head>
+
+<body>
+    <canvas id="c1" width="600" height="400"></canvas>
+    <script>
+        var c1 = document.getElementById("c1");
+        // 获取绘图上下文对象
+        var ctx = c1.getContext("2d");
+
+        let index = 0
+        function draw() {
+            ctx.clearRect(0, 0, c1.width, c1.height);
+            index++
+            if (index > 10) index = 0
+            ctx.beginPath();
+            ctx.moveTo(10, 10);
+            ctx.lineTo(100, 150);
+            ctx.lineTo(180, 160);
+            ctx.lineTo(300, 100);
+
+            // 设置线条宽度
+            ctx.lineWidth = 2; // 30
+            // 设置线条端点样式，butt 平齐, round 半圆, square 正方形
+            ctx.lineCap = "square";
+            // 设置线条连接样式，bevel 折平，肖平, round 角被磨圆, miter 外侧边框相交的点 (默认)
+            ctx.lineJoin = "miter";
+            // 限制miter连接处尖角的长度超过10会转为肖平
+            ctx.miterLimit = 5;
+
+            // 设置虚线，实线段10px，空白5px，循环出现
+            ctx.setLineDash([10, 5]);
+            // 设置虚线开始的偏移量，10px
+            ctx.lineDashOffset = index;
+            ctx.stroke();
+            ctx.closePath();
+            requestAnimationFrame(draw);
+        }
+        requestAnimationFrame(draw);
+    </script>
+</body>
+
+</html>

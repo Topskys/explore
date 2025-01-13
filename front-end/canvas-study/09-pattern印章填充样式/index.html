@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas</title>
+</head>
+
+<body>
+    <canvas id="c1" width="600" height="400"></canvas>
+    <script>
+        var c1 = document.getElementById("c1");
+        // 获取绘图上下文对象
+        var ctx = c1.getContext("2d");
+
+        const img = new Image();
+        img.src = "1.png";
+        img.onload = function () {
+            // let pattern = ctx.createPattern(document.getElementById("img1"), "repeat-x");
+            let pattern = ctx.createPattern(img, "repeat"); // img 可以是img对象或者canvas对象
+            ctx.fillStyle = pattern;
+            ctx.fillRect(0, 0, c1.width, c1.height);
+        }
+    </script>
+</body>
+
+</html>

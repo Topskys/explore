@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas</title>
+</head>
+
+<body>
+    <canvas id="c1" width="600" height="400"></canvas>
+    <script>
+        var c1 = document.getElementById("c1");
+        // 获取绘图上下文对象
+        var ctx = c1.getContext("2d");
+        // 绘制图片
+        var img = new Image();
+        img.src = "2.jpg";
+        img.onload = function () {
+            // 01 绘制图片到画布上
+            // ctx.drawImage(img, 0, 0); // 图片对象，x, y
+            // 02 设置大小
+            ctx.drawImage(img, 0, 0, 600, 400); // 图片对象，x, y, img_w, img_h
+            // 03 设置大小和裁剪（将图片缩放到对应的宽高）
+            // ctx.drawImage(img, 480, 0, 960, 600, 0, 0, 600, 400); // 图片对象，sx, sy, s_w, s_h, dx, dy, d_w, d_h
+
+            // 获取画布上指定区域的像素数据，数组中每四项表示一个RGBA表示一个像素的颜色值
+            let imageData = ctx.getImageData(0, 0, 600, 400);
+            for (let i = 0; i < imageData.data.length; i += 4) {
+                // 计算像素灰度值
+                let gray = (imageData.data[i] + imageData.data[i + 1] + imageData.data[i + 2]) / 3
+                // 复古滤镜效果
+                imageData.data[i] = gray; // R
+                imageData.data[i + 1] = gray; // G
+                imageData.data[i + 2] = gray; // B
+                imageData.data[i + 3] = 255; // A
+                // 修改像素颜色值
+                // imageData.data[i] = imageData.data[i] + 10; // R
+                // imageData.data[i + 1] = imageData.data[i + 1] - 10; // G
+                // imageData.data[i + 2] = imageData.data[i + 2] + 10; // B
+                // imageData.data[i + 3] = 255; // A
+
+            }
+            // 将修改后的像素数据绘制到画布上
+            // ctx.putImageData(imageData, 0, 0);
+            // ctx.putImageData(imageData, 0, 0,0,0,600,400);
+            ctx.putImageData(imageData, 0, 0, 300, 200, 300, 200);
+
+        };
+    </script>
+</body>
+
+</html>

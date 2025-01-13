@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas</title>
+</head>
+
+<body>
+    <canvas id="c1" width="600" height="400" style="width: 800px;height: 600px;">
+        Canvas not supported.
+        当前浏览器不支持canvas，请下载最新的浏览器
+        <a href="https://www.microsoft.com/en-us/edge/download">立即下载</a>
+    </canvas>
+    <script>
+        var c1 = document.getElementById("c1");
+        // 判断是否有绘图上下文对象
+        if (!c1.getContext) {
+            window.alert("当前浏览器不支持canvas，请下载最新的浏览器");
+        }
+        // 测试兼容性
+        console.log('c1\n', c1.getContext, c1.getContext('2d'));
+        console.log('body\n', document.body.getContext);
+
+        // 获取绘图上下文对象
+        var ctx = c1.getContext("2d");
+        // 绘制矩形（01-填充模式）
+        ctx.fillRect(0, 0, 50, 50); // x,y,w,h
+        // 绘制矩形（02-描边模式）
+        ctx.strokeRect(60, 0, 50, 50); // x,y,w,h
+        // 绘制矩形（03-清除模式）
+        ctx.clearRect(90, 25, 50, 50); // x,y,w,h
+        // 清空画布
+        // ctx.clearRect(0, 0, c1.clientWidth, c1.clientHeight);
+        // 绘制矩形（04-拆分写法）
+        // ctx.rect(120, 0, 50, 50);
+        // ctx.stroke(); // 描边，显示路径
+        // ctx.rect(180, 0, 50, 50);
+        // ctx.fill(); // 填充，
+        // 但之前的stroke也会变成填充模式，需要使用开始路径和闭合（结束）路径解决，表示下笔和收笔，或使用moveTo和lineTo代替
+
+        // 04-解决示例：
+        ctx.beginPath(); // 开始路径，开始一个新的绘图路径
+        ctx.rect(120, 0, 50, 50);
+        ctx.stroke(); // 描边，显示路径
+        ctx.closePath(); // 结束路径，闭合路径，但不显示
+
+        ctx.beginPath(); // 开始路径，开始一个新的绘图路径
+        ctx.rect(180, 0, 50, 50);
+        ctx.fill(); // 填充，但之前的stroke也会变成填充模式，需要使用开始路径和闭合（结束）路径解决
+        ctx.closePath(); // 结束路径，闭合路径，但不显示
+
+    </script>
+</body>
+
+</html>

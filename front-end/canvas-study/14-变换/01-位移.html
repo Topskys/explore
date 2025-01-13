@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas</title>
+</head>
+<body>
+    <canvas id="c1" width="600" height="400" style="border: 1px solid #ccc;"></canvas>
+    <script>
+        var c1 = document.getElementById("c1");
+        // 获取绘图上下文对象
+        var ctx = c1.getContext("2d");
+
+        // 位移
+        ctx.translate(50, 50); // x1,y1 --->（x2,y2）
+        // 绘制矩形
+        ctx.fillRect(0, 0, 50, 50); // (x1,y1,width,height)
+
+        // 位移
+        ctx.translate(100, 100);
+        // 绘制矩形
+        ctx.fillRect(0, 0, 50, 50);
+    </script>
+</body>
+</html>

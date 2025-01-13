@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machine Status Matrix with Scales</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="statusMatrix" width="550" height="550"></canvas>
+
+    <script>
+        // 获取画布元素
+        const canvas = document.getElementById("statusMatrix");
+        const ctx = canvas.getContext("2d");
+
+        // 定义矩阵的尺寸
+        const rows = 10;  // 行数
+        const cols = 10;  // 列数
+        const cellSize = 50;  // 每个矩形的尺寸（50x50）
+
+        // 状态定义
+        const STATUS = {
+            NOT_STARTED: 'not_started', // 未开始
+            IN_PROGRESS: 'in_progress', // 进行中
+            FAILED: 'failed',           // 失败
+            SUCCESS: 'success'          // 成功
+        };
+
+        // 生成初始状态矩阵（默认为未开始状态）
+        let matrix = Array.from({ length: rows }, () => Array(cols).fill(STATUS.NOT_STARTED));
+
+        // 绘制矩阵
+        function drawMatrix() {
+            // 清空画布
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // 绘制矩阵格子和状态
+            for (let row = 0; row < rows; row++) {
+                for (let col = 0; col < cols; col++) {
+                    const status = matrix[row][col];
+
+                    // 设置颜色
+                    let color;
+                    switch (status) {
+                        case STATUS.NOT_STARTED:
+                            color = '#D3D3D3';  // 灰色
+                            break;
+                        case STATUS.IN_PROGRESS:
+                            color = '#1E90FF';  // 蓝色
+                            break;
+                        case STATUS.FAILED:
+                            color = '#FF6347';  // 红色
+                            break;
+                        case STATUS.SUCCESS:
+                            color = '#32CD32';  // 绿色
+                            break;
+                    }
+
+                    // 绘制矩形
+                    ctx.fillStyle = color;
+                    ctx.fillRect(col * cellSize + 20, row * cellSize + 20, cellSize, cellSize);  // 加20来避开刻度
+                    // 可选：绘制矩阵坐标
+                    ctx.strokeStyle = '#000';
+                    ctx.strokeRect(col * cellSize + 20, row * cellSize + 20, cellSize, cellSize);
+                }
+            }
+
+            // 绘制水平和垂直刻度
+            drawScales();
+        }
+
+        // 绘制刻度
+        function drawScales() {
+            // 绘制水平刻度（列编号）
+            ctx.fillStyle = "#000";
+            for (let col = 0; col < cols; col++) {
+                ctx.fillText(col + 1, col * cellSize + 20 + cellSize / 2, 15);  // 列编号
+            }
+
+            // 绘制垂直刻度（行编号）
+            for (let row = 0; row < rows; row++) {
+                ctx.textAlign = "center";
+                ctx.fillText(row + 1, 10, row * cellSize + 20 + cellSize / 2);  // 行编号
+            }
+
+            // 绘制网格线
+            ctx.strokeStyle = "#000";
+            ctx.lineWidth = 1;
+            for (let i = 0; i <= rows; i++) {
+                ctx.beginPath();
+                ctx.moveTo(20, i * cellSize + 20);
+                ctx.lineTo(cols * cellSize + 20, i * cellSize + 20);
+                ctx.stroke();
+            }
+            for (let j = 0; j <= cols; j++) {
+                ctx.beginPath();
+                ctx.moveTo(j * cellSize + 20, 20);
+                ctx.lineTo(j * cellSize + 20, rows * cellSize + 20);
+                ctx.stroke();
+            }
+        }
+
+        // 更新状态：模拟机器运行
+        function updateMatrix() {
+            // 随机更新一些单元格的状态
+            for (let row = 0; row < rows; row++) {
+                for (let col = 0; col < cols; col++) {
+                    // 随机选择状态
+                    const rand = Math.random();
+                    if (rand < 0.1) {
+                        matrix[row][col] = STATUS.NOT_STARTED;
+                    } else if (rand < 0.3) {
+                        matrix[row][col] = STATUS.IN_PROGRESS;
+                    } else if (rand < 0.7) {
+                        matrix[row][col] = STATUS.FAILED;
+                    } else {
+                        matrix[row][col] = STATUS.SUCCESS;
+                    }
+                }
+            }
+
+            // 重新绘制矩阵
+            drawMatrix();
+        }
+
+        // 初始化并绘制矩阵
+        drawMatrix();
+
+        // 模拟每2秒更新一次矩阵状态
+        setInterval(updateMatrix, 2000);
+    </script>
+</body>
+</html>

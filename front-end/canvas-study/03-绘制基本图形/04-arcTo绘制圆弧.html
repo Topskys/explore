@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas</title>
+</head>
+
+<body>
+    <canvas id="c1" width="600" height="400" >
+        Canvas not supported.
+        当前浏览器不支持canvas，请下载最新的浏览器
+        <a href="https://www.microsoft.com/en-us/edge/download">立即下载</a>
+    </canvas>
+    <script>
+        var c1 = document.getElementById("c1");
+        // 判断是否有绘图上下文对象
+        if (!c1.getContext) {
+            window.alert("当前浏览器不支持canvas，请下载最新的浏览器");
+        }
+
+        // 获取绘图上下文对象
+        var ctx = c1.getContext("2d");
+        // arcTo使用三个坐标点控制圆弧的形状，切线画圆弧
+        ctx.beginPath(); 
+        // 第一个点
+        ctx.moveTo(100, 10); // 起点
+        // 第二点和第三个点，圆弧的半径
+        ctx.arcTo(250,10,100,72.5,31); // 绘制圆弧路径
+        ctx.stroke();
+        ctx.closePath();
+
+        // 绘制辅助三个点线
+        ctx.setLineDash([]);
+        // 第一个点
+        ctx.beginPath();
+        ctx.fillStyle = "red";
+        ctx.moveTo(100, 10);
+        ctx.fillRect(100, 7.5, 5, 5);
+        // 绘制第一个点和第二个点虚线连线
+        ctx.moveTo(50, 10);
+        ctx.setLineDash([5, 5]);
+        ctx.lineTo(250, 10);
+        // 第二个点
+        ctx.fillStyle = "green";
+        moveTo(250, 10);
+        ctx.fillRect(250, 7.5, 5, 5);
+        // 绘制第二个点和第三个点虚线连线
+        ctx.lineTo(50, 100-2.5);
+        // 第三个点
+        ctx.fillStyle = "blue";
+        ctx.moveTo(50, 100);
+        ctx.fillRect(102.5, 72.5, 5, 5);
+        ctx.stroke();
+        ctx.closePath();
+        ctx.beginPath();
+        // 绘制第三个点和第一个点虚线连线
+        ctx.moveTo(105, 72.5);
+        ctx.lineTo(102.5, 10);
+        ctx.stroke();
+        ctx.closePath();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas</title>
+</head>
+<body>
+    <canvas id="c1" width="600" height="400">
+        Canvas not supported.
+        当前浏览器不支持canvas，请下载最新的浏览器
+        <a href="https://www.microsoft.com/en-us/edge/download">立即下载</a>
+    </canvas>
+    <script>
+        var c1 = document.getElementById("c1");
+        // 判断是否有绘图上下文对象
+        if (!c1.getContext) {
+            window.alert("当前浏览器不支持canvas，请下载最新的浏览器");
+        }
+        // 获取绘图上下文对象
+        var ctx = c1.getContext("2d");
+        // 绘制合成矩形
+        ctx.fillStyle = "rgb(200, 0, 0)"; // 设置填充颜色
+        ctx.fillRect(0, 0, 50, 50); // x,y,w,h
+        ctx.globalCompositeOperation = "source-in"; // 获取叠加部分，设置合成模式
+        ctx.fillStyle = "rgba(0, 0, 200, 0.5)"; // 设置填充颜色
+        ctx.fillRect(30, 30, 50, 50); // x,y,w,h
+
+    </script>
+</body>
+</html>

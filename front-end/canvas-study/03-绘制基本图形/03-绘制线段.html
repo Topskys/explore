@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas</title>
+</head>
+
+<body>
+    <canvas id="c1" width="600" height="400" style="width: 800px;height: 600px;">
+        Canvas not supported.
+        当前浏览器不支持canvas，请下载最新的浏览器
+        <a href="https://www.microsoft.com/en-us/edge/download">立即下载</a>
+    </canvas>
+    <script>
+        var c1 = document.getElementById("c1");
+        // 判断是否有绘图上下文对象
+        if (!c1.getContext) {
+            window.alert("当前浏览器不支持canvas，请下载最新的浏览器");
+        }
+        
+        // 获取绘图上下文对象
+        var ctx = c1.getContext("2d");
+        // 绘制线段
+        ctx.beginPath();
+        ctx.moveTo(10, 10);
+        ctx.lineTo(100, 100); // 绘制线段(10,10)到(100,100)
+        // 补充绘制三角形
+        ctx.lineTo(100, 10); // 绘制线段(100,100)到(100,10)
+        ctx.lineTo(10, 10); // 绘制线段(100,10)到(10,10)
+        ctx.stroke();
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.moveTo(10, 110);
+        ctx.lineTo(100, 110); // 绘制线段(10,110)到(100,160)
+        ctx.lineTo(100, 200); // 绘制线段(100,160)到(160,10)
+        ctx.lineTo(10, 110); 
+        ctx.fill();
+        ctx.closePath();
+
+        
+    </script>
+</body>
+
+</html>

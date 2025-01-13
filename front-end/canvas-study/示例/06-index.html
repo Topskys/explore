@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Matrix Selection</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="myCanvas" width="600" height="600"></canvas>
+    <script>
+        const canvas = document.getElementById("myCanvas");
+        const ctx = canvas.getContext("2d");
+
+        const n = 10; // n*n的矩阵
+        const cellSize = 30; // 每个单元格大小（10px间隔 + 10px单元格大小）
+
+        let selectedRectangles = []; // 存储选中的矩形区域
+
+        // 绘制n*n的矩阵
+        function drawMatrix() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            for (let i = 0; i < n; i++) {
+                for (let j = 0; j < n; j++) {
+                    const x = j * cellSize;
+                    const y = i * cellSize;
+                    ctx.strokeStyle = "black";
+
+                    // 检查当前矩形是否在选中区域中
+                    if (isRectangleSelected(x, y)) {
+                        ctx.strokeStyle = "blue"; // 如果选中，边框为蓝色
+                    }
+
+                    ctx.fillRect(x, y, cellSize - 10, cellSize - 10); // 绘制矩形边框
+                }
+            }
+        }
+
+        // 检查矩形是否被选中
+        function isRectangleSelected(x, y) {
+            return selectedRectangles.some(rect => {
+                return x >= rect.x && x < rect.x + cellSize &&
+                    y >= rect.y && y < rect.y + cellSize;
+            });
+        }
+
+        // 用于存储框选区域的起点和终点
+        let selectionStart = null;
+        let selectionEnd = null;
+
+        // 鼠标按下事件
+        canvas.addEventListener("mousedown", (e) => {
+            const rect = canvas.getBoundingClientRect();
+            selectionStart = {
+                x: Math.floor((e.clientX - rect.left) / cellSize) * cellSize,
+                y: Math.floor((e.clientY - rect.top) / cellSize) * cellSize
+            };
+            selectionEnd = { ...selectionStart }; // 初始化结束点
+        });
+
+        // 鼠标移动事件
+        canvas.addEventListener("mousemove", (e) => {
+            if (!selectionStart) return;
+
+            const rect = canvas.getBoundingClientRect();
+            selectionEnd = {
+                x: Math.floor((e.clientX - rect.left) / cellSize) * cellSize,
+                y: Math.floor((e.clientY - rect.top) / cellSize) * cellSize
+            };
+            drawMatrix(); // 重新绘制矩阵
+        });
+
+        // 鼠标松开事件
+        canvas.addEventListener("mouseup", () => {
+            if (selectionStart && selectionEnd) {
+                const x1 = Math.min(selectionStart.x, selectionEnd.x);
+                const y1 = Math.min(selectionStart.y, selectionEnd.y);
+                const x2 = Math.max(selectionStart.x, selectionEnd.x);
+                const y2 = Math.max(selectionStart.y, selectionEnd.y);
+
+                // 记录所有在框选区域内的矩形
+                for (let i = 0; i < n; i++) {
+                    for (let j = 0; j < n; j++) {
+                        const x = j * cellSize;
+                        const y = i * cellSize;
+                        if (x >= x1 && x < x2 && y >= y1 && y < y2) {
+                            selectedRectangles.push({ x, y });
+                        }
+                    }
+                }
+            }
+            selectionStart = null;
+            selectionEnd = null;
+            drawMatrix(); // 重新绘制矩阵
+        });
+
+        // 初始化绘制矩阵
+        drawMatrix();
+
+        const option = {
+            status: ['initial', 'pending', 'resolved', 'rejected'],
+            colors: ['white', 'yellow', 'green', 'red'],
+            xAxis: {
+                gap: 10,
+                data: Array.from({ length: 10 }, (_, i) => i)
+            },
+            yAxis: {
+                gap: 10,
+                data: Array.from({ length: 10 }, (_, i) => i)
+            },
+            series: {
+                data: Array.from({ length: 10 }, (_, i) => i)
+            },
+            legend:{
+                data: ['初始状态', '待处理', '已解决', '已拒绝']
+            }
+        }
+    </script>
+</body>
+
+</html>

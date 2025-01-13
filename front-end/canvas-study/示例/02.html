@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>机器运行状态矩阵</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        canvas {
+            display: block;
+            background-color: #f0f0f0;
+            margin: 20px auto;
+        }
+        .container {
+            width: 100vw;
+            height: 100vh;
+            overflow: auto;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <canvas id="myCanvas" width="800" height="600"></canvas>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('myCanvas');
+        const ctx = canvas.getContext('2d');
+        const matrixSize = 10;  // 矩阵的行列数 (n * n)
+        const minCellSize = 30;  // 单个矩形最小宽度
+
+        let scale = 1;  // 初始缩放比例
+        let cells = [];  // 存储矩阵的状态
+        let hoverCell = null;  // 当前悬浮的单元格
+
+        // 初始化矩阵的状态
+        function initCells() {
+            cells = [];
+            for (let i = 0; i < matrixSize; i++) {
+                let row = [];
+                for (let j = 0; j < matrixSize; j++) {
+                    row.push({
+                        status: getRandomStatus(),
+                        x: j * minCellSize,
+                        y: i * minCellSize,
+                        width: minCellSize,
+                        height: minCellSize,
+                        index: i * matrixSize + j + 1  // 序号从 1 开始
+                    });
+                }
+                cells.push(row);
+            }
+        }
+
+        // 随机生成矩阵的运行状态
+        function getRandomStatus() {
+            const statuses = ['未开始', '进行中', '失败', '成功'];
+            return statuses[Math.floor(Math.random() * statuses.length)];
+        }
+
+        // 绘制矩阵
+        function drawMatrix() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.save();  // 保存当前状态
+
+            ctx.scale(scale, scale);  // 缩放
+
+            // 绘制刻度
+            drawScale();
+
+            // 绘制矩阵的单元格
+            cells.forEach(row => {
+                row.forEach(cell => {
+                    // 绘制每个矩形的背景
+                    ctx.fillStyle = getCellColor(cell.status);
+                    ctx.fillRect(cell.x, cell.y, cell.width, cell.height);
+
+                    // 绘制序号
+                    ctx.fillStyle = '#000';
+                    ctx.font = '16px Arial';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(cell.index, cell.x + cell.width / 2, cell.y + cell.height / 2);
+
+                    // 绘制当前鼠标悬浮的矩形（高亮显示）
+                    if (hoverCell && hoverCell.index === cell.index) {
+                        ctx.lineWidth = 2;
+                        ctx.strokeStyle = 'red';
+                        ctx.strokeRect(cell.x, cell.y, cell.width, cell.height);
+                        ctx.lineWidth = 1;
+                    }
+                });
+            });
+
+            ctx.restore();  // 恢复之前保存的状态
+        }
+
+        // 获取单元格的背景色
+        function getCellColor(status) {
+            switch (status) {
+                case '未开始': return '#D3D3D3';  // 灰色
+                case '进行中': return '#FFD700';  // 金色
+                case '失败': return '#FF6347';  // 红色
+                case '成功': return '#32CD32';  // 绿色
+                default: return '#FFFFFF';  // 默认白色
+            }
+        }
+
+        // 绘制外部刻度
+        function drawScale() {
+            const cellWidth = minCellSize * scale;
+            const cellHeight = minCellSize * scale;
+
+            // 绘制X轴刻度
+            for (let i = 0; i <= matrixSize; i++) {
+                const x = i * cellWidth;
+                ctx.fillText(i, x + cellWidth / 2, 10);
+                ctx.beginPath();
+                ctx.moveTo(x, 20);
+                ctx.lineTo(x, canvas.height);
+                ctx.stroke();
+            }
+
+            // 绘制Y轴刻度
+            for (let i = 0; i <= matrixSize; i++) {
+                const y = i * cellHeight;
+                ctx.fillText(i, 10, y + cellHeight / 2);
+                ctx.beginPath();
+                ctx.moveTo(20, y);
+                ctx.lineTo(canvas.width, y);
+                ctx.stroke();
+            }
+        }
+
+        // 鼠标悬浮事件
+        canvas.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const mouseX = (e.clientX - rect.left) / scale;
+            const mouseY = (e.clientY - rect.top) / scale;
+
+            hoverCell = null;
+
+            // 检查鼠标是否在某个矩形内
+            cells.forEach(row => {
+                row.forEach(cell => {
+                    if (mouseX >= cell.x && mouseX <= cell.x + cell.width &&
+                        mouseY >= cell.y && mouseY <= cell.y + cell.height) {
+                        hoverCell = cell;
+                    }
+                });
+            });
+
+            drawMatrix();  // 重绘矩阵
+        });
+
+        // 缩放事件
+        canvas.addEventListener('wheel', (e) => {
+            // 判断滚轮方向
+            if (eY < 0) {
+                scale *= 1.1;  // 放大
+            } else {
+                scale /= 1.1;  // 缩小
+            }
+
+            scale = Math.max(0.5, Math.min(3, scale));  // 限制缩放比例
+
+            drawMatrix();  // 重新绘制矩阵
+            e.preventDefault();  // 阻止默认滚动行为
+        });
+
+        // 初始化矩阵并绘制
+        initCells();
+        drawMatrix();
+    </script>
+</body>
+</html>

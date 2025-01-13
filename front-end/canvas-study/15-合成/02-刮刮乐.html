@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .ggl {
+            width: 600px;
+            height: 400px;
+            font-size: 30px;
+            font-weight: 900;
+            text-align: center;
+            line-height: 400px;
+            overflow: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 10;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="ggl">谢谢惠顾</div>
+    <canvas id="c1" width="600" height="400">
+        Canvas not supported.
+        当前浏览器不支持canvas，请下载最新的浏览器
+        <a href="https://www.microsoft.com/en-us/edge/download">立即下载</a>
+    </canvas>
+    <script>
+        var c1 = document.getElementById("c1");
+        // 判断是否有绘图上下文对象
+        if (!c1.getContext) {
+            window.alert("当前浏览器不支持canvas，请下载最新的浏览器");
+        }
+        // 获取绘图上下文对象
+        var ctx = c1.getContext("2d");
+        // 绘制图片盖上文字
+        var img = new Image();
+        img.src = "2.jpg";
+        img.onload = function () {
+            ctx.drawImage(img, 0, 0, 600, 400);
+        };
+
+        c1.onmousedown = function () {
+            isDraw = true;
+        }
+        c1.onmouseup = function () {
+            isDraw = false;
+        }
+        c1.onmousemove = function (e) {
+            if (!isDraw) return;
+            var x = e.pageX;
+            var y = e.pageY;
+            ctx.globalCompositeOperation = "destination-out"; // 设置全局透明合成操作
+            ctx.arc(x, y, 20, 0, Math.PI * 2, true); // 绘制圆形
+            ctx.fill();
+        }
+
+        let random = Math.random();
+        if (random < 0.1) {
+            var ggl = document.querySelector(".ggl");
+            ggl.innerHTML = "恭喜发财";
+        }
+
+    </script>
+</body>
+
+</html>

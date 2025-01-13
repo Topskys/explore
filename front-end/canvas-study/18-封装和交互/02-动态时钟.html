@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas</title>
+</head>
+
+<body>
+    <canvas id="c1" width="800" height="600"></canvas>
+    <script>
+        var c1 = document.getElementById("c1");
+        // 获取绘图上下文对象
+        var ctx = c1.getContext("2d");
+        function draw() {
+            ctx.clearRect(0, 0, c1.width, c1.height); // 清空画布
+            ctx.save(); // 存档，保存绘图上下文对象状态
+            ctx.translate(400, 300); // 平移坐标系(0,0)-->(400,300)
+            ctx.rotate(-Math.PI / 2); // 旋转坐标系90度
+
+            ctx.save();
+
+            // 绘制小时刻度
+            for (var i = 0; i < 12; i++) {
+                ctx.beginPath(); // 开始绘制路径
+                ctx.moveTo(170, 0); // 移动到坐标点
+                ctx.lineTo(190, 0); // 绘制线段
+                ctx.font = '20px Helvetica'
+                ctx.fillText(i === 0 ? 12 : i, 200, 0, 10);
+                ctx.lineWidth = 8; // 设置线宽
+                ctx.strokeStyle = "black"; // 设置描边样式
+                ctx.stroke(); // 描边
+                ctx.rotate(Math.PI * 2 / 12); // 旋转坐标系30度
+                ctx.closePath(); // 结束绘制路径
+            }
+
+            ctx.restore(); // 恢复绘图上下文对象状态
+            ctx.save();
+            // 绘制分钟刻度
+            for (var i = 0; i < 60; i++) {
+                ctx.beginPath(); // 开始绘制路径
+                ctx.moveTo(180, 0); // 移动到坐标点
+                ctx.lineTo(190, 0); // 绘制线段
+                ctx.lineWidth = 4; // 设置线宽
+                ctx.strokeStyle = "black"; // 设置描边样式
+                ctx.stroke(); // 描边
+                ctx.rotate(Math.PI * 2 / 60); // 旋转坐标系30度
+                ctx.closePath(); // 结束绘制路径
+            }
+            ctx.restore(); // 恢复绘图上下文对象状态
+            ctx.save();
+
+            // 获取当前时间
+            var date = new Date();
+            var hour = date.getHours(); // 获取小时
+            var min = date.getMinutes(); // 获取分钟
+            var sec = date.getSeconds(); // 获取秒
+            hour = hour > 12 ? hour - 12 : hour;
+
+            // 绘制秒针
+            ctx.beginPath(); // 开始绘制路径
+            ctx.rotate(Math.PI * 2 / 60 * sec); // 根据秒数旋转坐标系
+            ctx.moveTo(-30, 0)
+            ctx.lineTo(160, 0);
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = "red";
+            ctx.stroke();
+            ctx.closePath(); // 结束绘制路径
+            ctx.restore(); // 恢复绘图上下文对象状态
+            ctx.save();
+
+            // 绘制分针
+            ctx.beginPath(); // 开始绘制路径
+            ctx.rotate(Math.PI * 2 / 60 * min + Math.PI * 2 / 60 / 60 * sec); // 根据分钟数旋转坐标系
+            ctx.moveTo(-20, 0)
+            ctx.lineTo(130, 0);
+            ctx.lineWidth = 4;
+            ctx.strokeStyle = "black";
+            ctx.stroke();
+            ctx.closePath(); // 结束绘制路径
+            ctx.restore(); // 恢复绘图上下文对象状态
+            ctx.save();
+
+            // 绘制时针
+            ctx.beginPath(); // 开始绘制路径
+            ctx.rotate(Math.PI * 2 / 12 * hour + Math.PI * 2 / 12 / 60 * min + Math.PI * 2 / 12 / 60 / 60 * sec); // 根据小时数旋转坐标系
+            ctx.moveTo(-15, 0)
+            ctx.lineTo(110, 0);
+            ctx.lineWidth = 8;
+            ctx.strokeStyle = "black";
+            ctx.stroke();
+            ctx.closePath(); // 结束绘制路径
+            ctx.restore(); // 恢复绘图上下文对象状态
+
+            ctx.restore(); // 恢复到初始状态
+            requestAnimationFrame(draw); // 绘制下一次动画
+        }
+        draw();
+    </script>
+</body>
+
+</html>

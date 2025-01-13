@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas</title>
+</head>
+
+<body>
+    <canvas id="c1" width="600" height="400"></canvas>
+    <script>
+        var c1 = document.getElementById("c1");
+        // 获取绘图上下文对象
+        var ctx = c1.getContext("2d");
+        // 从封装的路径对象中获取绘制图形api
+        var hearPath = new Path2D();
+        console.log('-----Path2D------', hearPath);
+        // 绘制三次贝塞尔曲线，三个控制点
+
+
+        var hearPath2 = new Path2D();
+        hearPath2.moveTo(200, 300);
+        hearPath2.quadraticCurveTo(150, 300, 150, 200);
+        hearPath2.quadraticCurveTo(150, 100, 300, 100);
+        hearPath2.quadraticCurveTo(450, 100, 450, 200);
+        hearPath2.quadraticCurveTo(450, 300, 250, 300);
+        hearPath2.quadraticCurveTo(250, 350, 150, 350);
+        hearPath2.quadraticCurveTo(200, 350, 200, 300);
+        ctx.stroke(hearPath2);
+
+        class Heart {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.path2d = new Path2D();
+
+                this.path2d.moveTo(this.x, this.y); // 起始点
+                this.path2d.bezierCurveTo(this.x + 50, this.y - 50, this.x + 100, this.y, this.x, this.y + 50);
+                this.path2d.bezierCurveTo(this.x - 100, this.y, this.x - 50, this.y - 50, this.x, this.y);
+
+                this.color = 'red'; // 设置填充颜色
+                this.isIn = false;
+
+                this.eventMapList = {
+                    hover: [],
+                    leave: []
+                }
+
+                c1.onmousemove = e => {
+                    // 判断鼠标的位置是否在画布上
+                    const { offsetX, offsetY } = e;
+                    this.isIn = ctx.isPointInPath(this.path2d, offsetX, offsetY);
+                    if (this.isIn) {
+                        this.eventMapList.hover.forEach(fn => fn());
+                    } else {
+                        this.eventMapList.leave.forEach(fn => fn());
+                    }
+                }
+            }
+
+            draw() {
+                ctx.save(); // 保存当前画布状态
+                ctx.fillStyle = this.color; // 设置填充颜色
+                ctx.fill(this.path2d);
+                ctx.restore(); // 恢复画布状态
+            }
+
+            onHover(fn) {
+                this.eventMapList.hover.push(fn);
+            }
+
+            onLeave(fn) {
+                this.eventMapList.leave.push(fn);
+            }
+        }
+
+        var heart = new Heart(300, 200);
+        heart.onHover(() => {
+            console.log('鼠标在心形区域内');
+            heart.color = 'red'; // 设置填充颜色
+        })
+        heart.onLeave(() => {
+            console.log('鼠标不在心形区域内');
+            heart.color = 'blue'; // 设置填充颜色
+        })
+
+        function render() {
+            ctx.clearRect(0, 0, c1.width, c1.height);
+            heart.draw();
+            requestAnimationFrame(render);
+        }
+        render();
+    </script>
+</body>
+
+</html>

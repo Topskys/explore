@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas</title>
+</head>
+
+<body>
+    <canvas id="c1" width="600" height="400"></canvas>
+    <script>
+        var c1 = document.getElementById("c1");
+        // 获取绘图上下文对象
+        var ctx = c1.getContext("2d");
+        // 线性渐变
+        // let linearGradient = ctx.createLinearGradient(100, 200, 300, 300);
+        // linearGradient.addColorStop(0, "red");
+        // linearGradient.addColorStop(0.5, "#ffcccc");
+        // linearGradient.addColorStop(1, "blue");
+        // ctx.fillStyle = linearGradient
+        // ctx.fillRect(100,200,300,300);
+
+        let index = 0;
+        function draw() {
+            ctx.clearRect(0, 0, 600, 400)
+            index += 0.01;
+            if (index > 1) index = 0;
+            let linearGradient = ctx.createLinearGradient(100, 200, 300, 300);
+            linearGradient.addColorStop(0, "red");
+            linearGradient.addColorStop(index, "#ffcccc");
+            linearGradient.addColorStop(1, "blue");
+            ctx.fillStyle = linearGradient
+            ctx.fillRect(100, 200, 300, 300);
+            requestAnimationFrame(draw);
+        }
+
+        // 动画帧
+        requestAnimationFrame(draw);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #canvas {
+            border: 1px solid gray;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas" width="800" height="600"></canvas>
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        const circles = []; // 存储圆
+        const statusConfig = {
+            idle: 0,
+            drag_start: 1,
+            dragging: 2
+        } // 状态配置
+
+        const canvasInfo = {
+            status: statusConfig.idle,
+            dragTarget: null,
+            lastPosition: {
+                x: null,
+                y: null
+            },
+            offsetPosition: { // 偏移位置
+                x: null,
+                y: null
+            }
+        }
+
+
+        // 绘制圆
+        const drawCircle = (ctx, cx, cy, r) => {
+            ctx.save()
+            ctx.beginPath();
+            ctx.strokeStyle = 'blue';
+            ctx.arc(cx, cy, r, 0, Math.PI * 2);
+            ctx.stroke();
+            ctx.closePath();
+            ctx.restore()
+        }
+
+        drawCircle(ctx, 100, 100, 50);
+        circles.push({ x: 100, y: 100, r: 50 });
+
+        // 获取画布上的点位置
+        const getCanvasPosition = (e) => {
+            return {
+                x: e.offsetX,
+                y: e.offsetY
+            }
+        }
+
+        // 获取两点之间的距离
+        const getDistance = (p1, p2) => {
+            return Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2))
+        }
+
+        // 判断该点是否在圆内
+        const ifInCircle = (pos) => {
+            for (let i = 0; i < circles.length; i++) {
+                return getDistance(circles[i], pos) < circles[i].r && circles[i];
+            }
+        }
+
+        canvas.addEventListener('mousedown', (e) => {
+            e.preventDefault();
+            const canvasPosition = getCanvasPosition(e);
+            const circle = ifInCircle(canvasPosition);
+            if (circle) {
+                canvasInfo.dragTarget = circle;
+                canvasInfo.status = statusConfig.drag_start;
+                canvasInfo.lastPosition = canvasPosition;
+                canvasInfo.offsetPosition = canvasPosition;
+            }
+        })
+
+        canvas.addEventListener('mousemove', (e) => {
+            const canvasPosition = getCanvasPosition(e);
+            // 拖拽时鼠标样式
+            if (ifInCircle(canvasPosition)) {
+                canvas.style.cursor = 'all-scroll';
+            } else {
+                canvas.style.cursor = 'default'
+            }
+            if (canvasInfo.status === statusConfig.drag_start && getDistance(canvasPosition, canvasInfo.lastPosition) > 5) {
+                // 拖拽开始
+                canvasInfo.status = statusConfig.dragging;
+                canvasInfo.offsetPosition = canvasPosition;
+
+            } else if (canvasInfo.status === statusConfig.dragging) {
+                const { dragTarget } = canvasInfo;
+                dragTarget.x += canvasPosition.x - canvasInfo.offsetPosition.x;
+                dragTarget.y += canvasPosition.y - canvasInfo.offsetPosition.y;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                circles.forEach(c => drawCircle(ctx, c.x, c.y, c.r));
+                canvasInfo.offsetPosition = canvasPosition;
+            }
+        })
+
+        canvas.addEventListener('mouseup', (e) => {
+            if (canvasInfo.status === statusConfig.dragging) {
+                canvasInfo.status = statusConfig.idle;
+            }
+
+        })
+
+
+
+    </script>
+</body>
+
+</html>
